@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { fetchTShirts, createOrderIntent } from "../api/user";
+import { setCart } from "../store/cartSlice";
 
 const Customize = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const preselected = location.state?.tshirt || null;
   const [tshirts, setTshirts] = useState([]);
@@ -79,6 +82,7 @@ const Customize = () => {
       };
 
       sessionStorage.setItem("dm_cart", JSON.stringify(payload));
+      dispatch(setCart(payload));
       navigate("/cart", { state: payload });
     } catch (err) {
       setStatus({ loading: false, error: err.message });

@@ -3,6 +3,9 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDb = require("./config/db");
+const adminRoutes = require("./routes/adminRoutes");
+const tshirtRoutes = require("./routes/tshirtRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -11,6 +14,19 @@ app.use(express.json());
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
+});
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/tshirts", tshirtRoutes);
+app.use("/api/orders", orderRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  res.status(status).json({ message: err.message || "Server error" });
 });
 
 const PORT = process.env.PORT || 5000;

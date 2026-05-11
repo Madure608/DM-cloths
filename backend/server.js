@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDb = require("./config/db");
 const adminRoutes = require("./routes/adminRoutes");
+const userRoutes = require("./routes/userRoutes");
 const tshirtRoutes = require("./routes/tshirtRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
@@ -17,6 +18,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/admin", adminRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/tshirts", tshirtRoutes);
 app.use("/api/orders", orderRoutes);
 

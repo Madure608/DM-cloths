@@ -8,30 +8,15 @@ import {
   updateTShirt,
 } from "../../api/admin";
 
+const sizeOptions = ["S", "M", "L", "XL"];
+
 const emptyForm = {
   color: "",
   price: "",
-  imageUrl: "",
-  sizesText: "",
+  imageFile: null,
+  imagePreview: "",
+  sizes: sizeOptions.map((size) => ({ size, stock: "", enabled: false })),
 };
-
-const parseSizesText = (value) =>
-  value
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .map((entry) => {
-      const [sizeRaw, stockRaw] = entry.split(":").map((part) => part.trim());
-      const stock = Number.parseInt(stockRaw, 10);
-      if (!sizeRaw || Number.isNaN(stock)) return null;
-      return { size: sizeRaw.toUpperCase(), stock: Math.max(0, stock) };
-    })
-    .filter(Boolean);
-
-const formatSizes = (sizesAvailable = []) =>
-  sizesAvailable
-    .map((entry) => `${entry.size}:${entry.stock}`)
-    .join(", ");
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -102,7 +87,14 @@ const AdminDashboard = () => {
   }, [token]);
 
   const buildPayload = () => {
-    const sizesAvailable = parseSizesText(form.sizesText);
+    const sizesAvailable = form.sizes
+      .filter((entry) => entry.enabled)
+      .map((entry) => ({
+        size: entry.size,
+        stock: Number.parseInt(entry.stock, 10),
+      }))
+      .filter((entry) => !Number.isNaN(entry.stock));
+
     const price = Number.parseFloat(form.price);
 
     if (!form.color.trim()) {
@@ -114,13 +106,16 @@ const AdminDashboard = () => {
     }
 
     if (sizesAvailable.length === 0) {
-      throw new Error("Sizes must be in format S:10, M:5");
+      throw new Error("Select at least one size with stock");
+    }
+
+    if (!editingId && !form.imageFile) {
+      throw new Error("Please upload an image");
     }
 
     return {
       color: form.color.trim(),
       price,
-      imageUrl: form.imageUrl.trim(),
       sizesAvailable,
     };
   };
@@ -132,11 +127,18 @@ const AdminDashboard = () => {
 
     try {
       const payload = buildPayload();
+      const formData = new FormData();
+      formData.append("color", payload.color);
+      formData.append("price", String(payload.price));
+      formData.append("sizesAvailable", JSON.stringify(payload.sizesAvailable));
+      if (form.imageFile) {
+        formData.append("image", form.imageFile);
+      }
       if (editingId) {
-        await updateTShirt(editingId, payload);
+        await updateTShirt(editingId, formData);
         setMessage("T-shirt updated.");
       } else {
-        await createTShirt(payload);
+        await createTShirt(formData);
         setMessage("T-shirt added.");
       }
       setForm(emptyForm);
@@ -154,8 +156,14 @@ const AdminDashboard = () => {
     setForm({
       color: tshirt.color,
       price: String(tshirt.price),
-      imageUrl: tshirt.imageUrl || "",
-      sizesText: formatSizes(tshirt.sizesAvailable),
+      imageFile: null,
+      imagePreview: tshirt.imageUrl || "",
+      sizes: sizeOptions.map((size) => {
+        const match = tshirt.sizesAvailable.find((entry) => entry.size === size);
+        return match
+          ? { size, stock: String(match.stock), enabled: true }
+          : { size, stock: "", enabled: false };
+      }),
     });
   };
 
@@ -278,29 +286,73 @@ const AdminDashboard = () => {
                   />
                 </label>
               </div>
-              <label className="grid gap-2 text-sm">
-                <span className="text-clay">Sizes & stock</span>
-                <input
-                  className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
-                  value={form.sizesText}
-                  onChange={(event) =>
-                    setForm({ ...form, sizesText: event.target.value })
-                  }
-                  placeholder="S:10, M:8, L:5"
-                  required
-                />
-              </label>
-              <label className="grid gap-2 text-sm">
-                <span className="text-clay">Image URL</span>
-                <input
-                  className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
-                  value={form.imageUrl}
-                  onChange={(event) =>
-                    setForm({ ...form, imageUrl: event.target.value })
-                  }
-                  placeholder="https://..."
-                />
-              </label>
+              <div className="grid gap-3">
+                <p className="text-sm text-clay">Sizes & stock</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {form.sizes.map((entry, index) => (
+                    <label
+                      key={entry.size}
+                      className="flex items-center justify-between rounded-2xl border border-stone/40 bg-white px-4 py-3 text-sm"
+                    >
+                      <span className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={entry.enabled}
+                          onChange={(event) => {
+                            const updated = [...form.sizes];
+                            updated[index] = {
+                              ...updated[index],
+                              enabled: event.target.checked,
+                            };
+                            setForm({ ...form, sizes: updated });
+                          }}
+                        />
+                        {entry.size}
+                      </span>
+                      <input
+                        className="h-9 w-24 rounded-xl border border-stone/40 bg-white px-3 text-xs"
+                        value={entry.stock}
+                        onChange={(event) => {
+                          const updated = [...form.sizes];
+                          updated[index] = {
+                            ...updated[index],
+                            stock: event.target.value,
+                          };
+                          setForm({ ...form, sizes: updated });
+                        }}
+                        placeholder="Stock"
+                        type="number"
+                        min="0"
+                        disabled={!entry.enabled}
+                      />
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <div className="grid gap-3">
+                <label className="grid gap-2 text-sm">
+                  <span className="text-clay">Image upload</span>
+                  <input
+                    className="h-11 rounded-2xl border border-dashed border-stone/50 bg-sand/70 px-4 text-sm"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0] || null;
+                      const preview = file
+                        ? URL.createObjectURL(file)
+                        : form.imagePreview;
+                      setForm({ ...form, imageFile: file, imagePreview: preview });
+                    }}
+                  />
+                </label>
+                {form.imagePreview && (
+                  <img
+                    src={form.imagePreview}
+                    alt="T-shirt preview"
+                    className="h-32 w-full rounded-2xl border border-stone/30 object-cover"
+                  />
+                )}
+              </div>
 
               {message && (
                 <p className="rounded-2xl border border-stone/40 bg-sand px-4 py-2 text-sm text-clay">
@@ -344,17 +396,31 @@ const AdminDashboard = () => {
                 tshirts.map((tshirt) => (
                   <div
                     key={tshirt._id}
-                    className="rounded-2xl border border-stone/30 bg-white px-4 py-3"
+                      className="rounded-2xl border border-stone/30 bg-white px-4 py-3"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div>
-                        <p className="text-sm font-semibold text-ink">
-                          {tshirt.color}
-                        </p>
-                        <p className="text-xs text-clay">
-                          Rs. {tshirt.price} | {formatSizes(tshirt.sizesAvailable)}
-                        </p>
-                      </div>
+                      <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          {tshirt.imageUrl ? (
+                            <img
+                              src={tshirt.imageUrl}
+                              alt={tshirt.color}
+                              className="h-16 w-16 rounded-2xl border border-stone/30 object-cover"
+                            />
+                          ) : (
+                            <div className="h-16 w-16 rounded-2xl border border-stone/30 bg-sand" />
+                          )}
+                          <div>
+                            <p className="text-sm font-semibold text-ink">
+                              {tshirt.color}
+                            </p>
+                            <p className="text-xs text-clay">
+                              Rs. {tshirt.price} |{" "}
+                              {tshirt.sizesAvailable
+                                .map((entry) => `${entry.size}:${entry.stock}`)
+                                .join(", ")}
+                            </p>
+                          </div>
+                        </div>
                       <div className="flex gap-2">
                         <button
                           type="button"

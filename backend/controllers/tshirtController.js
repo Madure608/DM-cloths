@@ -1,4 +1,37 @@
+const cloudinary = require("../config/cloudinary");
 const TShirt = require("../models/TShirt");
+
+const uploadTShirtImage = (buffer) =>
+  new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: "dm-cloths/tshirts",
+        resource_type: "image",
+      },
+      (error, result) => {
+        if (error) return reject(error);
+        return resolve(result);
+      }
+    );
+
+    uploadStream.end(buffer);
+  });
+
+const parseSizesAvailable = (value) => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  return [];
+};
 
 const getTShirts = async (req, res) => {
   const tshirts = await TShirt.find().sort({ createdAt: -1 });
@@ -6,31 +39,72 @@ const getTShirts = async (req, res) => {
 };
 
 const createTShirt = async (req, res) => {
-  const { color, sizesAvailable, price, imageUrl } = req.body;
+  try {
+    const { color, price } = req.body;
+    const sizesAvailable = parseSizesAvailable(req.body.sizesAvailable);
 
-  if (!color || !Array.isArray(sizesAvailable) || typeof price !== "number") {
-    return res.status(400).json({ message: "Invalid T-shirt data" });
+    const parsedPrice = Number.parseFloat(price);
+
+    if (!color || !Array.isArray(sizesAvailable) || sizesAvailable.length === 0) {
+      return res.status(400).json({ message: "Invalid T-shirt data" });
+    }
+
+    if (Number.isNaN(parsedPrice) || parsedPrice < 0) {
+      return res.status(400).json({ message: "Invalid price" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "Image upload is required" });
+    }
+
+    const uploadResult = await uploadTShirtImage(req.file.buffer);
+
+    const tshirt = await TShirt.create({
+      color,
+      sizesAvailable,
+      price: parsedPrice,
+      imageUrl: uploadResult.secure_url,
+    });
+
+    return res.status(201).json(tshirt);
+  } catch (err) {
+    return res.status(400).json({ message: err.message || "Create failed" });
   }
-
-  const tshirt = await TShirt.create({
-    color,
-    sizesAvailable,
-    price,
-    imageUrl: imageUrl || "",
-  });
-
-  return res.status(201).json(tshirt);
 };
 
 const updateTShirt = async (req, res) => {
-  const { id } = req.params;
-  const updated = await TShirt.findByIdAndUpdate(id, req.body, { new: true });
+  try {
+    const { id } = req.params;
+    const sizesAvailable = parseSizesAvailable(req.body.sizesAvailable);
+    const payload = { ...req.body };
 
-  if (!updated) {
-    return res.status(404).json({ message: "T-shirt not found" });
+    if (payload.price !== undefined) {
+      const parsedPrice = Number.parseFloat(payload.price);
+      if (Number.isNaN(parsedPrice) || parsedPrice < 0) {
+        return res.status(400).json({ message: "Invalid price" });
+      }
+      payload.price = parsedPrice;
+    }
+
+    if (sizesAvailable.length > 0) {
+      payload.sizesAvailable = sizesAvailable;
+    }
+
+    if (req.file) {
+      const uploadResult = await uploadTShirtImage(req.file.buffer);
+      payload.imageUrl = uploadResult.secure_url;
+    }
+
+    const updated = await TShirt.findByIdAndUpdate(id, payload, { new: true });
+
+    if (!updated) {
+      return res.status(404).json({ message: "T-shirt not found" });
+    }
+
+    return res.json(updated);
+  } catch (err) {
+    return res.status(400).json({ message: err.message || "Update failed" });
   }
-
-  return res.json(updated);
 };
 
 const deleteTShirt = async (req, res) => {

@@ -17,6 +17,8 @@ const Home = () => {
   const [tshirts, setTshirts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [colorFilter, setColorFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("latest");
 
   useEffect(() => {
     const load = async () => {
@@ -32,6 +34,22 @@ const Home = () => {
 
     load();
   }, []);
+
+  const colors = [
+    "all",
+    ...Array.from(new Set(tshirts.map((tshirt) => tshirt.color.toLowerCase()))),
+  ];
+
+  const filtered = tshirts.filter((tshirt) => {
+    if (colorFilter === "all") return true;
+    return tshirt.color.toLowerCase() === colorFilter;
+  });
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === "price_low") return a.price - b.price;
+    if (sortBy === "price_high") return b.price - a.price;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
 
   return (
     <div className="px-6 py-12 text-ink">
@@ -101,11 +119,41 @@ const Home = () => {
         </div>
 
         <div id="collection" className="grid gap-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-display text-2xl">Current collection</h2>
-            <span className="text-xs uppercase tracking-[0.3em] text-clay">
-              Updated weekly
-            </span>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="font-display text-2xl">Current collection</h2>
+              <span className="text-xs uppercase tracking-[0.3em] text-clay">
+                Updated weekly
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <label className="text-[11px] uppercase tracking-[0.3em] text-clay">
+                Color
+                <select
+                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  value={colorFilter}
+                  onChange={(event) => setColorFilter(event.target.value)}
+                >
+                  {colors.map((color) => (
+                    <option key={color} value={color}>
+                      {color === "all" ? "All" : color}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-[11px] uppercase tracking-[0.3em] text-clay">
+                Sort
+                <select
+                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  value={sortBy}
+                  onChange={(event) => setSortBy(event.target.value)}
+                >
+                  <option value="latest">Latest</option>
+                  <option value="price_low">Price: Low to high</option>
+                  <option value="price_high">Price: High to low</option>
+                </select>
+              </label>
+            </div>
           </div>
 
           {error && (
@@ -122,7 +170,7 @@ const Home = () => {
                     className="h-44 animate-fadeUp rounded-3xl border border-stone/40 bg-white/70"
                   />
                 ))
-              : tshirts.map((tshirt, index) => (
+              : sorted.map((tshirt, index) => (
                   <motion.button
                     key={tshirt._id}
                     type="button"
@@ -135,7 +183,16 @@ const Home = () => {
                       navigate("/customize", { state: { tshirt } })
                     }
                   >
-                    <div className="flex items-center justify-between">
+                    {tshirt.imageUrl ? (
+                      <img
+                        src={tshirt.imageUrl}
+                        alt={tshirt.color}
+                        className="h-40 w-full rounded-2xl border border-stone/30 object-cover"
+                      />
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl border border-stone/30 bg-sand" />
+                    )}
+                    <div className="mt-4 flex items-center justify-between">
                       <p className="text-xs uppercase tracking-[0.3em] text-clay">
                         {tshirt.color}
                       </p>
@@ -143,7 +200,7 @@ const Home = () => {
                         Rs. {tshirt.price}
                       </span>
                     </div>
-                    <div className="mt-4 text-sm text-clay">
+                    <div className="mt-2 text-sm text-clay">
                       Sizes: {tshirt.sizesAvailable.map((s) => s.size).join(", ")}
                     </div>
                     <div className="mt-6 flex items-center justify-between">

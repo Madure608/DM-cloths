@@ -5,8 +5,8 @@ import { bootstrapAdmin } from "../../api/admin";
 const AdminSignup = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [bootstrapKey, setBootstrapKey] = useState("");
   const [status, setStatus] = useState({ loading: false, error: "", ok: "" });
 
   const handleSubmit = async (event) => {
@@ -14,7 +14,7 @@ const AdminSignup = () => {
     setStatus({ loading: true, error: "", ok: "" });
 
     try {
-      await bootstrapAdmin({ username, password, bootstrapKey });
+      await bootstrapAdmin({ username, email, password });
       setStatus({
         loading: false,
         error: "",
@@ -31,21 +31,9 @@ const AdminSignup = () => {
       <section className="mx-auto w-full max-w-md rounded-3xl border border-stone/40 bg-white/80 p-8 shadow-sm">
         <h1 className="font-display text-3xl">Admin Signup</h1>
         <p className="mt-2 text-sm text-clay">
-          Create the first admin using the bootstrap key.
+          Create the first admin account for DM CLOTHS.
         </p>
         <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
-          <label className="grid gap-2 text-sm">
-            <span className="text-clay">Bootstrap key</span>
-            <input
-              className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
-              value={bootstrapKey}
-              onChange={(event) => setBootstrapKey(event.target.value)}
-              placeholder="Bootstrap key"
-              type="password"
-              autoComplete="off"
-              required
-            />
-          </label>
           <label className="grid gap-2 text-sm">
             <span className="text-clay">Username</span>
             <input
@@ -54,6 +42,18 @@ const AdminSignup = () => {
               onChange={(event) => setUsername(event.target.value)}
               placeholder="admin"
               autoComplete="username"
+              required
+            />
+          </label>
+          <label className="grid gap-2 text-sm">
+            <span className="text-clay">Email</span>
+            <input
+              className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="admin@example.com"
+              autoComplete="email"
+              type="email"
               required
             />
           </label>

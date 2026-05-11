@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../api/admin";
 
 const AdminLogin = () => {
@@ -67,9 +67,9 @@ const AdminLogin = () => {
         </form>
         <p className="mt-6 text-xs text-clay">
           Need to create the first admin?{" "}
-          <a className="text-ink underline" href="/admin/signup">
+          <Link className="text-ink underline" to="/admin/signup">
             Bootstrap admin
-          </a>
+          </Link>
         </p>
       </section>
     </main>

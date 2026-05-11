@@ -47,6 +47,36 @@ const AdminDashboard = () => {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [intentFilter, setIntentFilter] = useState("all");
+  const [search, setSearch] = useState("");
+
+  const pendingCount = intents.filter((intent) => intent.status === "pending")
+    .length;
+  const totalInventory = tshirts.length;
+  const totalIntents = intents.length;
+
+  const filteredIntents = useMemo(() => {
+    const normalized = search.trim().toLowerCase();
+
+    return intents.filter((intent) => {
+      if (intentFilter !== "all" && intent.status !== intentFilter) {
+        return false;
+      }
+
+      if (!normalized) return true;
+
+      const haystack = [
+        intent.customerName,
+        intent.phoneNumber,
+        intent.selectedColor,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(normalized);
+    });
+  }, [intents, intentFilter, search]);
 
   const loadData = async () => {
     setLoading(true);
@@ -191,6 +221,26 @@ const AdminDashboard = () => {
           </p>
         )}
 
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {[
+            { label: "Inventory", value: totalInventory },
+            { label: "Order intents", value: totalIntents },
+            { label: "Pending", value: pendingCount },
+          ].map((card) => (
+            <div
+              key={card.label}
+              className="rounded-3xl border border-stone/40 bg-white/80 p-4 shadow-sm"
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-clay">
+                {card.label}
+              </p>
+              <p className="mt-3 text-2xl font-semibold text-ink">
+                {card.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div className="rounded-3xl border border-stone/40 bg-white/70 p-6 shadow-sm">
             <h2 className="font-display text-2xl">Inventory</h2>
@@ -333,13 +383,37 @@ const AdminDashboard = () => {
             <p className="mt-2 text-sm text-clay">
               Customers who clicked checkout.
             </p>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <label className="text-xs uppercase tracking-[0.2em] text-clay">
+                Status
+                <select
+                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  value={intentFilter}
+                  onChange={(event) => setIntentFilter(event.target.value)}
+                >
+                  <option value="all">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="contacted">Contacted</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </label>
+              <label className="text-xs uppercase tracking-[0.2em] text-clay">
+                Search
+                <input
+                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder="Name, phone, color"
+                />
+              </label>
+            </div>
             <div className="mt-6 grid gap-4">
               {loading ? (
                 <p className="text-sm text-clay">Loading intents...</p>
-              ) : intents.length === 0 ? (
+              ) : filteredIntents.length === 0 ? (
                 <p className="text-sm text-clay">No intents yet.</p>
               ) : (
-                intents.map((intent) => (
+                filteredIntents.map((intent) => (
                   <div
                     key={intent._id}
                     className="rounded-2xl border border-stone/30 bg-white px-4 py-3"

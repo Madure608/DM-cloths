@@ -1,37 +1,27 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import connectDB from "./config/db.js";
-import { initCloudinary } from "./config/cloudinary.js";
-import adminRoutes from "./routes/adminRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
-import tshirtRoutes from "./routes/tshirtRoutes.js";
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-dotenv.config();
+const connectDb = require("./config/db");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ status: "DM CLOTHS API running" });
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
 });
-
-app.use("/api/admin", adminRoutes);
-app.use("/api/tshirts", tshirtRoutes);
-app.use("/api/orders", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-connectDB()
+connectDb()
   .then(() => {
-    initCloudinary();
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`DM CLOTHS API running on port ${PORT}`);
     });
   })
-  .catch((error) => {
-    console.error("Failed to connect to MongoDB", error);
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
     process.exit(1);
   });

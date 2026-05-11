@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const adminUserSchema = new mongoose.Schema(
   {
@@ -6,16 +7,27 @@ const adminUserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true
+      trim: true,
+      lowercase: true,
     },
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+      minlength: 6,
+    },
   },
   { timestamps: true }
 );
 
-const AdminUser = mongoose.model("AdminUser", adminUserSchema);
+adminUserSchema.pre("save", async function hashPassword(next) {
+  if (!this.isModified("password")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-export default AdminUser;
+adminUserSchema.methods.comparePassword = function comparePassword(candidate) {
+  return bcrypt.compare(candidate, this.password);
+};
+
+module.exports = mongoose.model("AdminUser", adminUserSchema);

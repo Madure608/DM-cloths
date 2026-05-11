@@ -1,44 +1,45 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const orderIntentSchema = new mongoose.Schema(
   {
     customerName: {
       type: String,
-      trim: true
+      trim: true,
+      default: "",
     },
     phoneNumber: {
       type: String,
-      trim: true
+      trim: true,
+      default: "",
     },
     selectedTShirtId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "TShirt",
-      required: true
+      required: true,
     },
     selectedColor: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     selectedSize: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      uppercase: true,
     },
     uploadedStickerUrl: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     status: {
       type: String,
       default: "pending",
-      trim: true
-    }
+      enum: ["pending", "contacted", "closed"],
+    },
   },
   { timestamps: true }
 );
 
-const OrderIntent = mongoose.model("OrderIntent", orderIntentSchema);
-
-export default OrderIntent;
+module.exports = mongoose.model("OrderIntent", orderIntentSchema);

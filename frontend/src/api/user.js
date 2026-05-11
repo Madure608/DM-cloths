@@ -2,6 +2,18 @@ import { API_BASE_URL, request } from "./client";
 
 const fetchTShirts = () => request("/api/tshirts");
 
+const registerUser = (payload) =>
+  request("/api/users/register", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+const loginUser = (payload) =>
+  request("/api/users/login", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
 const createOrderIntent = async (payload) => {
   const response = await fetch(`${API_BASE_URL}/api/orders/intent`, {
     method: "POST",
@@ -23,4 +35,4 @@ const createOrderIntent = async (payload) => {
   return data;
 };
 
-export { fetchTShirts, createOrderIntent };
+export { fetchTShirts, createOrderIntent, registerUser, loginUser };

@@ -6,6 +6,18 @@ const loginAdmin = (payload) =>
     body: JSON.stringify(payload),
   });
 
+const bootstrapAdmin = (payload) =>
+  request("/api/admin/bootstrap", {
+    method: "POST",
+    headers: payload?.bootstrapKey
+      ? { "x-bootstrap-key": payload.bootstrapKey }
+      : {},
+    body: JSON.stringify({
+      username: payload.username,
+      password: payload.password,
+    }),
+  });
+
 const fetchTShirts = () => request("/api/tshirts");
 
 const createTShirt = (payload) =>
@@ -35,6 +47,7 @@ const fetchOrderIntents = () =>
 
 export {
   loginAdmin,
+  bootstrapAdmin,
   fetchTShirts,
   createTShirt,
   updateTShirt,

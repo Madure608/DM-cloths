@@ -56,6 +56,18 @@ const Home = () => {
                 Start customizing
               </Link>
               <Link
+                to="/login"
+                className="rounded-full border border-clay px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/signup"
+                className="rounded-full border border-clay px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
+              >
+                Sign up
+              </Link>
+              <Link
                 to="/admin/login"
                 className="rounded-full border border-clay px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
               >

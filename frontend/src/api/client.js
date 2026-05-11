@@ -6,6 +6,11 @@ const getAuthHeader = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+const getUserAuthHeader = () => {
+  const token = localStorage.getItem("dm_user_token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
 const request = async (path, options = {}) => {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     headers: {
@@ -30,4 +35,4 @@ const request = async (path, options = {}) => {
   return data;
 };
 
-export { API_BASE_URL, getAuthHeader, request };
+export { API_BASE_URL, getAuthHeader, getUserAuthHeader, request };

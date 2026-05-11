@@ -4,15 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#101113",
-        sand: "#f4f1ea",
-        stone: "#b9b3a9",
-        clay: "#8d8477",
-        ember: "#f97316",
+        charcoal: "#2a2622",
+        cream: "#f6efea",
+        blush: "#f4c7c3",
+        rose: "#e8a6a1",
+        taupe: "#9a8f86",
+        cloud: "#fff9f6",
       },
       fontFamily: {
-        display: ["Playfair Display", "serif"],
-        body: ["Manrope", "sans-serif"],
+        display: ["DM Serif Display", "serif"],
+        body: ["Sora", "sans-serif"],
       },
     },
   },

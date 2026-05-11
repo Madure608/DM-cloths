@@ -65,6 +65,12 @@ const AdminLogin = () => {
             {status.loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
+        <p className="mt-6 text-xs text-clay">
+          Need to create the first admin?{" "}
+          <a className="text-ink underline" href="/admin/signup">
+            Bootstrap admin
+          </a>
+        </p>
       </section>
     </main>
   );

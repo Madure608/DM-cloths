@@ -1,21 +1,11 @@
-const cloudinary = require("../config/cloudinary");
 const TShirt = require("../models/TShirt");
 
-const uploadTShirtImage = (buffer) =>
-  new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: "dm-cloths/tshirts",
-        resource_type: "image",
-      },
-      (error, result) => {
-        if (error) return reject(error);
-        return resolve(result);
-      }
-    );
-
-    uploadStream.end(buffer);
-  });
+const buildImageUrl = (req, file) => {
+  if (!file) return "";
+  const host = req.get("host");
+  const protocol = req.protocol;
+  return `${protocol}://${host}/uploads/${file.filename}`;
+};
 
 const parseSizesAvailable = (value) => {
   if (!value) return [];
@@ -57,13 +47,11 @@ const createTShirt = async (req, res) => {
       return res.status(400).json({ message: "Image upload is required" });
     }
 
-    const uploadResult = await uploadTShirtImage(req.file.buffer);
-
     const tshirt = await TShirt.create({
       color,
       sizesAvailable,
       price: parsedPrice,
-      imageUrl: uploadResult.secure_url,
+      imageUrl: buildImageUrl(req, req.file),
     });
 
     return res.status(201).json(tshirt);
@@ -91,8 +79,7 @@ const updateTShirt = async (req, res) => {
     }
 
     if (req.file) {
-      const uploadResult = await uploadTShirtImage(req.file.buffer);
-      payload.imageUrl = uploadResult.secure_url;
+      payload.imageUrl = buildImageUrl(req, req.file);
     }
 
     const updated = await TShirt.findByIdAndUpdate(id, payload, { new: true });

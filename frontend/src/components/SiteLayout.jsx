@@ -25,14 +25,16 @@ const SiteLayout = () => {
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
           <Link
             to="/"
-            className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em]"
+            className="group flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em]"
           >
-            <img
-              src={logo}
-              alt="Glowy by DM"
-              className="h-10 w-10 rounded-full border border-stone/40 object-cover"
-            />
-            DM CLOTHS
+            <span className="relative grid h-11 w-11 place-items-center rounded-full bg-white/80 shadow-[0_8px_24px_rgba(92,77,56,0.25)] ring-1 ring-stone/40 transition group-hover:-translate-y-0.5">
+              <img
+                src={logo}
+                alt="Glowy by DM"
+                className="h-9 w-9 rounded-full object-cover"
+              />
+            </span>
+            <span className="tracking-[0.28em] text-ink">DM CLOTHS</span>
           </Link>
           <nav className="hidden items-center gap-6 text-xs uppercase tracking-[0.25em] text-clay md:flex">
             <Link to="/">Home</Link>

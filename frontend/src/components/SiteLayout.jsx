@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import logo from "../assets/WhatsApp Image 2026-05-13 at 4.18.03 PM.jpeg";
 
 const SiteLayout = () => {
   const navigate = useNavigate();
@@ -24,9 +25,13 @@ const SiteLayout = () => {
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
           <Link
             to="/"
-            className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em]"
+            className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em]"
           >
-            <span className="h-3 w-3 rounded-full bg-ember" />
+            <img
+              src={logo}
+              alt="Glowy by DM"
+              className="h-10 w-10 rounded-full border border-stone/40 object-cover"
+            />
             DM CLOTHS
           </Link>
           <nav className="hidden items-center gap-6 text-xs uppercase tracking-[0.25em] text-clay md:flex">

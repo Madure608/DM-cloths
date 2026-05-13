@@ -4,16 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: "#2a2622",
-        cream: "#f6efea",
-        blush: "#f4c7c3",
-        rose: "#e8a6a1",
-        taupe: "#9a8f86",
-        cloud: "#fff9f6",
-        ink: "#1b1917",
-        sand: "#f6efea",
-        clay: "#9a8f86",
-        ember: "#d46a5c",
+        charcoal: "#2c2b2a",
+        cream: "#f7f3ec",
+        blush: "#f1d7c8",
+        rose: "#cfe6f7",
+        taupe: "#9aa2ab",
+        cloud: "#ffffff",
+        ink: "#2c2b2a",
+        sand: "#f7f3ec",
+        clay: "#7b8fa3",
+        ember: "#f2c86b",
       },
       fontFamily: {
         display: ["DM Serif Display", "serif"],

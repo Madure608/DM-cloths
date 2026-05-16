@@ -18,24 +18,24 @@ const Account = () => {
 
   return (
     <section className="mx-auto w-full max-w-5xl px-6 py-12">
-      <div className="rounded-3xl border border-stone/40 bg-white/80 p-8 shadow-sm">
-        <p className="text-xs uppercase tracking-[0.3em] text-clay">Account</p>
-        <h1 className="mt-4 font-display text-3xl">Welcome back</h1>
-        <p className="mt-2 text-sm text-clay">
+      <div className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+        <p className="text-xs uppercase tracking-[0.3em] text-slate">Account</p>
+        <h1 className="mt-4 font-display text-4xl">Welcome back</h1>
+        <p className="mt-2 text-sm text-slate">
           Your account is ready. We will surface order history once the checkout
           flow is fully connected.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <button
             type="button"
-            className="h-11 rounded-full bg-ink px-6 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
+            className="h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.2em] text-white"
             onClick={() => navigate("/customize")}
           >
             Start new order
           </button>
           <button
             type="button"
-            className="h-11 rounded-full border border-clay px-6 text-xs font-semibold uppercase tracking-[0.2em]"
+            className="h-11 rounded-full border border-borderSoft px-6 text-xs font-semibold uppercase tracking-[0.2em]"
             onClick={handleLogout}
           >
             Sign out

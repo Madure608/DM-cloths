@@ -93,25 +93,25 @@ const Customize = () => {
   };
 
   return (
-    <main className="min-h-screen bg-sand px-6 py-12 text-ink">
+    <main className="min-h-screen bg-mist px-6 py-12 text-ink">
       <section className="mx-auto w-full max-w-6xl">
         <div className="flex flex-col gap-2">
-          <h1 className="font-display text-3xl sm:text-4xl">Customize</h1>
-          <p className="max-w-xl text-base text-clay">
+          <h1 className="font-display text-4xl sm:text-5xl">Customize</h1>
+          <p className="max-w-xl text-base text-slate">
             Select a T-shirt color and size, then upload your sticker.
           </p>
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <form
-            className="rounded-3xl border border-stone/40 bg-white/70 p-8 shadow-sm"
+            className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm"
             onSubmit={handleSubmit}
           >
             <div className="grid gap-4">
               <label className="grid gap-2 text-sm">
-                <span className="text-clay">Pick a color</span>
+                <span className="text-slate">Pick a color</span>
                 <select
-                  className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+                  className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
                   value={selectedId}
                   onChange={(event) => {
                     setSelectedId(event.target.value);
@@ -130,10 +130,10 @@ const Customize = () => {
               </label>
 
               <label className="grid gap-2 text-sm">
-                <span className="text-clay">Pick a size</span>
+                <span className="text-slate">Pick a size</span>
                 <div className="flex flex-wrap gap-2">
                   {sizesAvailable.length === 0 && (
-                    <span className="text-xs text-clay">
+                    <span className="text-xs text-slate">
                       Select a T-shirt to view sizes.
                     </span>
                   )}
@@ -143,8 +143,8 @@ const Customize = () => {
                       type="button"
                       className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] ${
                         selectedSize === entry.size
-                          ? "border-ink bg-ink text-sand"
-                          : "border-stone/40 text-ink"
+                          ? "border-brandOrange bg-brandOrange text-white"
+                          : "border-borderSoft text-ink"
                       }`}
                       onClick={() => setSelectedSize(entry.size)}
                       disabled={entry.stock === 0}
@@ -156,9 +156,9 @@ const Customize = () => {
               </label>
 
               <label className="grid gap-2 text-sm">
-                <span className="text-clay">Your name (optional)</span>
+                <span className="text-slate">Your name (optional)</span>
                 <input
-                  className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+                  className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
                   value={customerName}
                   onChange={(event) => setCustomerName(event.target.value)}
                   placeholder="Your name"
@@ -166,9 +166,9 @@ const Customize = () => {
               </label>
 
               <label className="grid gap-2 text-sm">
-                <span className="text-clay">Phone number (optional)</span>
+                <span className="text-slate">Phone number (optional)</span>
                 <input
-                  className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+                  className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
                   value={phoneNumber}
                   onChange={(event) => setPhoneNumber(event.target.value)}
                   placeholder="+94..."
@@ -176,9 +176,9 @@ const Customize = () => {
               </label>
 
               <label className="grid gap-2 text-sm">
-                <span className="text-clay">Upload sticker</span>
+                <span className="text-slate">Upload sticker</span>
                 <input
-                  className="h-11 rounded-2xl border border-dashed border-stone/50 bg-sand/70 px-4 text-sm"
+                  className="h-11 rounded-2xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 px-4 text-sm"
                   type="file"
                   accept="image/*"
                   onChange={(event) => setStickerFile(event.target.files?.[0])}
@@ -187,14 +187,14 @@ const Customize = () => {
               </label>
 
               {status.error && (
-                <p className="rounded-2xl border border-ember/40 bg-ember/10 px-4 py-2 text-sm text-ember">
+                <p className="rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
                   {status.error}
                 </p>
               )}
 
               <button
                 type="submit"
-                className="h-11 rounded-full bg-ink px-6 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
+                className="h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.2em] text-white"
                 disabled={status.loading}
               >
                 {status.loading ? "Uploading..." : "Save & continue"}
@@ -202,11 +202,11 @@ const Customize = () => {
             </div>
           </form>
 
-          <div className="rounded-3xl border border-stone/40 bg-white/70 p-8 shadow-sm">
-            <p className="text-xs uppercase tracking-[0.3em] text-clay">
+          <div className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate">
               Preview
             </p>
-            <div className="mt-4 rounded-3xl border border-dashed border-stone/60 bg-sand/70 p-6">
+            <div className="mt-4 rounded-3xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 p-6">
               {preview ? (
                 <img
                   src={preview}
@@ -214,13 +214,13 @@ const Customize = () => {
                   className="mx-auto max-h-60 rounded-2xl object-contain"
                 />
               ) : (
-                <p className="text-sm text-clay">
+                <p className="text-sm text-slate">
                   Upload a sticker to see it here.
                 </p>
               )}
             </div>
             {selectedTShirt && (
-              <div className="mt-6 grid gap-2 text-sm text-clay">
+              <div className="mt-6 grid gap-2 text-sm text-slate">
                 <p className="text-ink">{selectedTShirt.color}</p>
                 <p>Selected size: {selectedSize || "-"}</p>
                 <p>Price: Rs. {selectedTShirt.price}</p>

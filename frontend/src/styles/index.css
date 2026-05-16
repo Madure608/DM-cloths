@@ -2,19 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap");
+
 :root {
-  font-family: "Sora", sans-serif;
+  font-family: "Manrope", sans-serif;
   color-scheme: only light;
+  --brand: #f85606;
+  --brand-dark: #e24b00;
+  --brand-soft: #ffefe7;
+  --ink: #1b1b1b;
+  --slate: #6b7280;
+  --mist: #f8fafc;
+  --cloud: #ffffff;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #f7f3ec;
-  color: #2c2b2a;
-  background-image: radial-gradient(circle at top left, #cfe6f7 0%, transparent 45%),
-    radial-gradient(circle at 80% 20%, #ffffff 0%, transparent 50%),
-    linear-gradient(120deg, rgba(242, 200, 107, 0.18), rgba(247, 243, 236, 0.95));
+  background-color: var(--mist);
+  color: var(--ink);
+  background-image: radial-gradient(circle at 15% 0%, #fff3ea 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #fff7f0 0%, transparent 40%),
+    linear-gradient(180deg, #fff8f3 0%, #f8fafc 55%, #f3f6fb 100%);
   background-attachment: fixed;
 }
 

@@ -22,17 +22,17 @@ const UserLogin = () => {
   };
 
   return (
-    <main className="min-h-screen bg-sand px-6 py-12 text-ink">
-      <section className="mx-auto w-full max-w-md rounded-3xl border border-stone/40 bg-white/80 p-8 shadow-sm">
-        <h1 className="font-display text-3xl">Sign in</h1>
-        <p className="mt-2 text-sm text-clay">
+    <main className="min-h-screen bg-mist px-6 py-12 text-ink">
+      <section className="mx-auto w-full max-w-md rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+        <h1 className="font-display text-4xl">Sign in</h1>
+        <p className="mt-2 text-sm text-slate">
           Access your saved orders and preferences.
         </p>
         <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
           <label className="grid gap-2 text-sm">
-            <span className="text-clay">Email</span>
+            <span className="text-slate">Email</span>
             <input
-              className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+              className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="you@example.com"
@@ -42,9 +42,9 @@ const UserLogin = () => {
             />
           </label>
           <label className="grid gap-2 text-sm">
-            <span className="text-clay">Password</span>
+            <span className="text-slate">Password</span>
             <input
-              className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+              className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="••••••••"
@@ -54,19 +54,19 @@ const UserLogin = () => {
             />
           </label>
           {status.error && (
-            <p className="rounded-2xl border border-ember/40 bg-ember/10 px-4 py-2 text-sm text-ember">
+            <p className="rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
               {status.error}
             </p>
           )}
           <button
             type="submit"
-            className="h-11 rounded-full bg-ink text-sm font-semibold uppercase tracking-[0.2em] text-sand"
+            className="h-11 rounded-full bg-brandOrange text-sm font-semibold uppercase tracking-[0.2em] text-white"
             disabled={status.loading}
           >
             {status.loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
-        <p className="mt-6 text-xs text-clay">
+        <p className="mt-6 text-xs text-slate">
           New here?{" "}
           <Link className="text-ink underline" to="/signup">
             Create an account

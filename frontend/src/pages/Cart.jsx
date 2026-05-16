@@ -40,19 +40,19 @@ const Cart = () => {
   };
 
   return (
-    <main className="min-h-screen bg-sand px-6 py-12 text-ink">
+    <main className="min-h-screen bg-mist px-6 py-12 text-ink">
       <section className="mx-auto w-full max-w-6xl">
-        <h1 className="font-display text-3xl sm:text-4xl">Cart</h1>
-        <p className="mt-3 max-w-xl text-base text-clay">
+        <h1 className="font-display text-4xl sm:text-5xl">Cart</h1>
+        <p className="mt-3 max-w-xl text-base text-slate">
           Review your customized tee before WhatsApp checkout.
         </p>
 
         {!cart ? (
-          <div className="mt-8 rounded-3xl border border-stone/40 bg-white/70 p-8 shadow-sm">
-            <p className="text-sm text-clay">Your cart is empty.</p>
+          <div className="mt-8 rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+            <p className="text-sm text-slate">Your cart is empty.</p>
             <button
               type="button"
-              className="mt-6 h-11 rounded-full bg-ink px-6 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
+              className="mt-6 h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.2em] text-white"
               onClick={() => navigate("/customize")}
             >
               Start customizing
@@ -60,27 +60,27 @@ const Cart = () => {
           </div>
         ) : (
           <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl border border-stone/40 bg-white/70 p-8 shadow-sm">
+            <div className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
               <div className="flex items-center justify-between">
-                <p className="text-xs uppercase tracking-[0.3em] text-clay">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate">
                   Selection
                 </p>
                 <span className="text-sm font-semibold text-ink">
                   Rs. {cart.price}
                 </span>
               </div>
-              <div className="mt-4 grid gap-2 text-sm text-clay">
+              <div className="mt-4 grid gap-2 text-sm text-slate">
                 <p className="text-ink">{cart.color}</p>
                 <p>Size: {cart.size}</p>
                 <p>Customer: {cart.customerName || "-"}</p>
                 <p>Phone: {cart.phoneNumber || "-"}</p>
               </div>
             </div>
-            <div className="rounded-3xl border border-stone/40 bg-white/70 p-8 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.3em] text-clay">
+            <div className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate">
                 Sticker
               </p>
-              <div className="mt-4 rounded-3xl border border-dashed border-stone/60 bg-sand/70 p-6">
+              <div className="mt-4 rounded-3xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 p-6">
                 {cart.stickerUrl ? (
                   <img
                     src={cart.stickerUrl}
@@ -88,24 +88,24 @@ const Cart = () => {
                     className="mx-auto max-h-60 rounded-2xl object-contain"
                   />
                 ) : (
-                  <p className="text-sm text-clay">Sticker not available.</p>
+                  <p className="text-sm text-slate">Sticker not available.</p>
                 )}
               </div>
               {error && (
-                <p className="mt-4 rounded-2xl border border-ember/40 bg-ember/10 px-4 py-2 text-sm text-ember">
+                <p className="mt-4 rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
                   {error}
                 </p>
               )}
               <button
                 type="button"
-                className="mt-6 h-11 w-full rounded-full bg-ink text-xs font-semibold uppercase tracking-[0.2em] text-sand"
+                className="mt-6 h-11 w-full rounded-full bg-brandOrange text-xs font-semibold uppercase tracking-[0.2em] text-white"
                 onClick={handleCheckout}
               >
                 Checkout on WhatsApp
               </button>
               <button
                 type="button"
-                className="mt-3 h-11 w-full rounded-full border border-clay text-xs font-semibold uppercase tracking-[0.2em]"
+                className="mt-3 h-11 w-full rounded-full border border-borderSoft text-xs font-semibold uppercase tracking-[0.2em]"
                 onClick={() => navigate("/customize")}
               >
                 Edit design

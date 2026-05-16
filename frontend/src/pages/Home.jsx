@@ -19,6 +19,14 @@ const Home = () => {
   const [error, setError] = useState("");
   const [colorFilter, setColorFilter] = useState("all");
   const [sortBy, setSortBy] = useState("latest");
+  const categories = [
+    "Streetwear",
+    "Minimal",
+    "Oversized",
+    "Logo",
+    "Pastel",
+    "Monochrome",
+  ];
 
   useEffect(() => {
     const load = async () => {
@@ -52,85 +60,153 @@ const Home = () => {
   });
 
   return (
-    <div className="px-6 py-12 text-ink">
-      <section className="mx-auto flex w-full max-w-6xl flex-col gap-14">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="px-6 py-10 text-ink">
+      <section className="mx-auto flex w-full max-w-6xl flex-col gap-12">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="flex flex-col gap-6">
-            <p className="text-sm uppercase tracking-[0.3em] text-clay">
-              DM CLOTHS STUDIO
-            </p>
-            <h1 className="font-display text-4xl sm:text-5xl">
-              Custom tees with a modern, retail-ready experience.
+            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-brandOrangeSoft px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.35em] text-brandOrange">
+              Marketplace drops
+            </div>
+            <h1 className="font-display text-5xl leading-none sm:text-6xl">
+              Build your next tee. Shop it like a marketplace.
             </h1>
-            <p className="max-w-2xl text-base text-clay">
-              Build a personalized tee in minutes: curated colors, on-trend
-              fits, and a smooth WhatsApp checkout. We keep it minimal. You keep
-              it yours.
+            <p className="max-w-2xl text-base text-slate">
+              New colors every week, instant WhatsApp checkout, and fast island
+              delivery. Pick a fit, add your sticker, and launch a drop in
+              minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/customize"
-                className="rounded-full bg-ink px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-sand"
+                className="rounded-full bg-brandOrange px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white"
               >
                 Start customizing
               </Link>
               <Link
                 to="/signup"
-                className="rounded-full border border-clay px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
+                className="rounded-full border border-borderSoft bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
               >
                 Create account
               </Link>
             </div>
-            <div className="mt-2 grid grid-cols-3 gap-4 text-xs uppercase tracking-[0.3em] text-clay">
-              <div className="rounded-2xl border border-stone/40 bg-white/70 px-4 py-3 text-center">
+            <div className="grid grid-cols-3 gap-3 text-[11px] uppercase tracking-[0.3em] text-slate">
+              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
                 48-hour prep
               </div>
-              <div className="rounded-2xl border border-stone/40 bg-white/70 px-4 py-3 text-center">
-                Soft-touch inks
+              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
+                Live inventory
               </div>
-              <div className="rounded-2xl border border-stone/40 bg-white/70 px-4 py-3 text-center">
+              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
                 Island delivery
               </div>
             </div>
           </div>
-          <div className="relative overflow-hidden rounded-[32px] border border-stone/40 bg-white/70 p-8">
-            <div className="absolute -right-16 -top-10 h-40 w-40 rounded-full bg-ember/30 blur-3xl" />
-            <div className="absolute -bottom-12 -left-10 h-36 w-36 rounded-full bg-rose/40 blur-3xl" />
-            <div className="relative grid gap-4">
-              <p className="text-xs uppercase tracking-[0.3em] text-clay">
-                How it works
-              </p>
-              <div className="grid gap-4 text-sm text-ink">
-                <div className="rounded-2xl border border-stone/30 bg-white px-4 py-3">
-                  Select a color and size from our live inventory.
+
+          <div className="grid gap-4">
+            <div className="relative overflow-hidden rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
+              <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-brandOrangeSoft blur-3xl" />
+              <div className="relative grid gap-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate">
+                  Today only
+                </p>
+                <h2 className="font-display text-4xl">Flash drops</h2>
+                <p className="text-sm text-slate">
+                  Top colors, hot fits, and a ready-to-print pipeline. Update
+                  your merch with zero friction.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/customize"
+                    className="rounded-full bg-ink px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                  >
+                    Shop now
+                  </Link>
+                  <a
+                    href="#collection"
+                    className="rounded-full border border-borderSoft px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                  >
+                    View all
+                  </a>
                 </div>
-                <div className="rounded-2xl border border-stone/30 bg-white px-4 py-3">
-                  Upload a sticker or logo, we do the placement.
-                </div>
-                <div className="rounded-2xl border border-stone/30 bg-white px-4 py-3">
-                  Confirm via WhatsApp and track delivery updates.
-                </div>
-              </div>
-              <div className="rounded-2xl border border-stone/40 bg-sand/70 px-4 py-3 text-xs uppercase tracking-[0.25em] text-clay">
-                Trusted by 1,200+ creators
               </div>
             </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {["Best sellers", "New prints"].map((label) => (
+                <div
+                  key={label}
+                  className="rounded-3xl border border-borderSoft bg-white px-4 py-5 text-sm text-slate"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-brandOrange">
+                    {label}
+                  </p>
+                  <p className="mt-2 text-sm">
+                    Curated weekly and ready for fast checkout.
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              className="rounded-full border border-borderSoft bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div id="flash" className="grid gap-4 rounded-3xl bg-ink px-6 py-8 text-white">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-white/70">
+                Flash sale
+              </p>
+              <h2 className="font-display text-3xl">Limited-time drops</h2>
+            </div>
+            <div className="rounded-full bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em]">
+              Ends in 04:21:09
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              "Bold orange",
+              "Soft ash",
+              "Jet black",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-3xl border border-white/10 bg-white/5 p-4"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                  Flash pick
+                </p>
+                <p className="mt-2 text-sm font-semibold">{item}</p>
+                <p className="mt-3 text-xs text-white/70">
+                  Save up to 20% on limited stock.
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
         <div id="collection" className="grid gap-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h2 className="font-display text-2xl">Current collection</h2>
-              <span className="text-xs uppercase tracking-[0.3em] text-clay">
+              <h2 className="font-display text-3xl">New arrivals</h2>
+              <span className="text-xs uppercase tracking-[0.3em] text-slate">
                 Updated weekly
               </span>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <label className="text-[11px] uppercase tracking-[0.3em] text-clay">
+              <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
                 Color
                 <select
-                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
                   value={colorFilter}
                   onChange={(event) => setColorFilter(event.target.value)}
                 >
@@ -141,10 +217,10 @@ const Home = () => {
                   ))}
                 </select>
               </label>
-              <label className="text-[11px] uppercase tracking-[0.3em] text-clay">
+              <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
                 Sort
                 <select
-                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
                   value={sortBy}
                   onChange={(event) => setSortBy(event.target.value)}
                 >
@@ -157,7 +233,7 @@ const Home = () => {
           </div>
 
           {error && (
-            <p className="rounded-2xl border border-ember/40 bg-ember/10 px-4 py-2 text-sm text-ember">
+            <p className="rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
               {error}
             </p>
           )}
@@ -167,14 +243,14 @@ const Home = () => {
               ? Array.from({ length: 6 }).map((_, index) => (
                   <div
                     key={`skeleton-${index}`}
-                    className="h-44 animate-fadeUp rounded-3xl border border-stone/40 bg-white/70"
+                    className="h-44 animate-fadeUp rounded-3xl border border-borderSoft bg-white"
                   />
                 ))
               : sorted.map((tshirt, index) => (
                   <motion.button
                     key={tshirt._id}
                     type="button"
-                    className="group flex h-full flex-col justify-between rounded-3xl border border-stone/40 bg-white/80 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-ink/30"
+                    className="group flex h-full flex-col justify-between rounded-3xl border border-borderSoft bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-brandOrange/40"
                     custom={index}
                     initial="hidden"
                     animate="visible"
@@ -187,34 +263,34 @@ const Home = () => {
                       <img
                         src={tshirt.imageUrl}
                         alt={tshirt.color}
-                        className="h-40 w-full rounded-2xl border border-stone/30 object-cover"
+                        className="h-40 w-full rounded-2xl border border-borderSoft object-cover"
                       />
                     ) : (
-                      <div className="h-40 w-full rounded-2xl border border-stone/30 bg-sand" />
+                      <div className="h-40 w-full rounded-2xl border border-borderSoft bg-brandOrangeSoft" />
                     )}
                     <div className="mt-4 flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.3em] text-clay">
+                      <p className="text-xs uppercase tracking-[0.3em] text-slate">
                         {tshirt.color}
                       </p>
                       <span className="text-sm font-semibold text-ink">
                         Rs. {tshirt.price}
                       </span>
                     </div>
-                    <div className="mt-2 text-sm text-clay">
+                    <div className="mt-2 text-sm text-slate">
                       Sizes: {tshirt.sizesAvailable.map((s) => s.size).join(", ")}
                     </div>
                     <div className="mt-6 flex items-center justify-between">
                       <span className="text-xs uppercase tracking-[0.2em] text-ink">
                         Customize
                       </span>
-                      <span className="h-8 w-8 rounded-full border border-stone/40 bg-sand" />
+                      <span className="h-8 w-8 rounded-full border border-borderSoft bg-brandOrangeSoft" />
                     </div>
                   </motion.button>
                 ))}
           </div>
         </div>
 
-        <div className="grid gap-6 rounded-[36px] border border-stone/40 bg-white/80 p-8 lg:grid-cols-3">
+        <div className="grid gap-6 rounded-3xl border border-borderSoft bg-white p-8 lg:grid-cols-3">
           {[
             {
               title: "Premium fabric",
@@ -225,25 +301,25 @@ const Home = () => {
               body: "Balanced cuts that work for streetwear or clean minimal fits.",
             },
             {
-              title: "Live inventory",
-              body: "Stock levels stay current so you never order out-of-stock sizes.",
+              title: "Fast confirmation",
+              body: "Quick WhatsApp confirmations and tracked updates.",
             },
           ].map((item) => (
             <div key={item.title} className="grid gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-[0.2em]">
                 {item.title}
               </h3>
-              <p className="text-sm text-clay">{item.body}</p>
+              <p className="text-sm text-slate">{item.body}</p>
             </div>
           ))}
         </div>
 
         <div id="faq" className="grid gap-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-2xl">FAQ</h2>
+            <h2 className="font-display text-3xl">FAQ</h2>
             <Link
               to="/customize"
-              className="text-xs uppercase tracking-[0.3em] text-clay"
+              className="text-xs uppercase tracking-[0.3em] text-slate"
             >
               Start order
             </Link>
@@ -269,25 +345,25 @@ const Home = () => {
             ].map((item) => (
               <div
                 key={item.q}
-                className="rounded-3xl border border-stone/40 bg-white/80 p-6"
+                className="rounded-3xl border border-borderSoft bg-white p-6"
               >
                 <p className="text-sm font-semibold text-ink">{item.q}</p>
-                <p className="mt-2 text-sm text-clay">{item.a}</p>
+                <p className="mt-2 text-sm text-slate">{item.a}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-[36px] border border-stone/40 bg-ink px-8 py-10 text-sand">
+        <div className="rounded-3xl bg-brandOrange px-8 py-10 text-white">
           <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="grid gap-3">
-              <p className="text-xs uppercase tracking-[0.3em] text-sand/70">
+              <p className="text-xs uppercase tracking-[0.3em] text-white/70">
                 Ready when you are
               </p>
-              <h2 className="font-display text-3xl">
-                Build your next drop in minutes.
+              <h2 className="font-display text-4xl">
+                Launch your next drop today.
               </h2>
-              <p className="text-sm text-sand/70">
+              <p className="text-sm text-white/80">
                 Create a design, share it with your audience, and let us handle
                 production and delivery.
               </p>
@@ -295,13 +371,13 @@ const Home = () => {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 to="/customize"
-                className="rounded-full bg-sand px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink"
+                className="rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink"
               >
                 Start customizing
               </Link>
               <Link
                 to="/signup"
-                className="rounded-full border border-sand/60 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em]"
+                className="rounded-full border border-white/60 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em]"
               >
                 Create account
               </Link>

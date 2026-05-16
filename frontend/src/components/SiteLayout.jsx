@@ -20,91 +20,126 @@ const SiteLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-sand text-ink">
-      <header className="sticky top-0 z-20 border-b border-stone/40 bg-sand/90 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
-          <Link
-            to="/"
-            className="group flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em]"
-          >
-            <span className="relative grid h-11 w-11 place-items-center rounded-full bg-white/80 shadow-[0_8px_24px_rgba(92,77,56,0.25)] ring-1 ring-stone/40 transition group-hover:-translate-y-0.5">
-              <img
-                src={logo}
-                alt="Glowy by DM"
-                className="h-9 w-9 rounded-full object-cover"
+    <div className="min-h-screen bg-mist text-ink">
+      <header className="sticky top-0 z-30 shadow-sm">
+        <div className="bg-brandOrange text-white">
+          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em]">
+            <span>Delivering across Sri Lanka</span>
+            <div className="flex flex-wrap items-center gap-4">
+              <span>Hotline: 011-555-1212</span>
+              <Link to="/admin/login" className="underline">
+                Sell on DM
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-cloud">
+          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
+            <Link to="/" className="flex items-center gap-3">
+              <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brandOrangeSoft">
+                <img
+                  src={logo}
+                  alt="DM Cloths"
+                  className="h-10 w-10 rounded-xl object-cover"
+                />
+              </span>
+              <span className="font-display text-3xl tracking-[0.2em]">
+                DM CLOTHS
+              </span>
+            </Link>
+
+            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-borderSoft bg-white px-4 py-2 shadow-sm">
+              <input
+                className="w-full border-none bg-transparent text-sm outline-none"
+                placeholder="Search tees, colors, collections"
               />
-            </span>
-            <span className="tracking-[0.28em] text-ink">DM CLOTHS</span>
-          </Link>
-          <nav className="hidden items-center gap-6 text-xs uppercase tracking-[0.25em] text-clay md:flex">
-            <Link to="/">Home</Link>
-            <Link to="/customize">Customize</Link>
-            <a href="/#faq">FAQ</a>
-            <Link to="/admin/login">Admin</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            {userToken ? (
-              <>
-                <Link
-                  to="/account"
-                  className="rounded-full border border-clay px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
-                >
-                  Account
-                </Link>
-                <button
-                  type="button"
-                  className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
-                  onClick={handleLogout}
-                >
-                  Sign out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="rounded-full border border-clay px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  to="/signup"
-                  className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
-                >
-                  Sign up
-                </Link>
-              </>
-            )}
+              <button
+                type="button"
+                className="rounded-full bg-brandOrange px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+              >
+                Search
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                to="/cart"
+                className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+              >
+                Cart
+              </Link>
+              {userToken ? (
+                <>
+                  <Link
+                    to="/account"
+                    className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                  >
+                    My Account
+                  </Link>
+                  <button
+                    type="button"
+                    className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                    onClick={handleLogout}
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="border-t border-borderSoft">
+            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-slate">
+              <Link to="/">Home</Link>
+              <Link to="/customize">Customize</Link>
+              <a href="/#collection">New arrivals</a>
+              <a href="/#flash">Flash sale</a>
+              <a href="/#faq">Support</a>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="relative">
-        <div className="pointer-events-none absolute left-0 top-0 h-72 w-72 -translate-x-1/3 -translate-y-1/3 rounded-full bg-rose/40 blur-3xl" />
-        <div className="pointer-events-none absolute right-0 top-40 h-80 w-80 translate-x-1/3 rounded-full bg-ember/20 blur-3xl" />
+        <div className="pointer-events-none absolute left-0 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/3 rounded-full bg-brandOrangeSoft blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-24 h-80 w-80 translate-x-1/3 rounded-full bg-brandYellow/40 blur-3xl" />
         <Outlet />
       </main>
 
-      <footer className="border-t border-stone/40 bg-sand/80">
-        <div className="mx-auto grid w-full max-w-6xl gap-6 px-6 py-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <footer className="border-t border-borderSoft bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="grid gap-3">
-            <p className="text-xs uppercase tracking-[0.3em] text-clay">
-              DM CLOTHS
-            </p>
-            <p className="text-sm text-clay">
-              Custom tees with a refined, minimal process. Designed in Colombo,
-              shipped island-wide.
+            <p className="font-display text-2xl tracking-[0.2em]">DM CLOTHS</p>
+            <p className="text-sm text-slate">
+              Custom tees with a marketplace feel: fresh drops, fast checkout,
+              and island-wide delivery.
             </p>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-clay">
-            <Link to="/customize">Customize</Link>
-            <Link to="/login">Sign in</Link>
+          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-slate">
+            <Link to="/customize">Start customizing</Link>
+            <Link to="/login">My account</Link>
             <Link to="/signup">Create account</Link>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-clay">
-            <a href="/#faq">FAQ</a>
-            <Link to="/admin/login">Admin</Link>
-            <span className="text-[11px] text-clay">hello@dmcloths.lk</span>
+          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-slate">
+            <a href="/#faq">Help center</a>
+            <Link to="/admin/login">Sell on DM</Link>
+            <span className="text-[11px] text-slate">hello@dmcloths.lk</span>
           </div>
         </div>
       </footer>

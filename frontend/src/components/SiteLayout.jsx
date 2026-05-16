@@ -138,7 +138,12 @@ const SiteLayout = () => {
           </div>
           <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-slate">
             <a href="/#faq">Help center</a>
-            <Link to="/admin/login">Sell on DM</Link>
+            <Link
+              to="/admin/login"
+              className="w-fit rounded-full border border-borderSoft px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em]"
+            >
+              Admin
+            </Link>
             <span className="text-[11px] text-slate">hello@dmcloths.lk</span>
           </div>
         </div>

@@ -4,20 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
+        brandOrange: "#f85606",
+        brandOrangeDark: "#e24b00",
+        brandOrangeSoft: "#ffefe7",
+        brandYellow: "#ffd166",
+        brandBlue: "#1f4b99",
+        ink: "#1b1b1b",
+        slate: "#6b7280",
+        mist: "#f8fafc",
+        cloud: "#ffffff",
+        borderSoft: "#eef2f7",
         charcoal: "#2c2b2a",
         cream: "#f7f3ec",
         blush: "#f1d7c8",
         rose: "#cfe6f7",
         taupe: "#9aa2ab",
-        cloud: "#ffffff",
-        ink: "#2c2b2a",
         sand: "#f7f3ec",
         clay: "#7b8fa3",
         ember: "#f2c86b",
       },
       fontFamily: {
-        display: ["DM Serif Display", "serif"],
-        body: ["Sora", "sans-serif"],
+        display: ["Bebas Neue", "sans-serif"],
+        body: ["Manrope", "sans-serif"],
       },
       keyframes: {
         float: {

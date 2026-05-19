@@ -62,14 +62,9 @@ const SiteLayout = () => {
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  fill="currentColor"
                 >
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="M20 20l-3.5-3.5" />
+                  <path d="M10 3a7 7 0 1 0 4.47 12.4l4.07 4.07 1.42-1.42-4.07-4.07A7 7 0 0 0 10 3Zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z" />
                 </svg>
                 Search
               </button>
@@ -84,15 +79,9 @@ const SiteLayout = () => {
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  fill="currentColor"
                 >
-                  <circle cx="9" cy="20" r="1" />
-                  <circle cx="17" cy="20" r="1" />
-                  <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L20 8H6" />
+                  <path d="M7 18a2 2 0 1 0 2 2 2 2 0 0 0-2-2Zm10 0a2 2 0 1 0 2 2 2 2 0 0 0-2-2ZM6.2 6l.5 2H20a1 1 0 0 1 1 .76l-1.4 6a2 2 0 0 1-2 1.56H9.1a2 2 0 0 1-2-1.6L5.4 6.6 5 4H3V2h3a1 1 0 0 1 1 .8Z" />
                 </svg>
                 Cart
               </Link>
@@ -106,36 +95,17 @@ const SiteLayout = () => {
                       aria-hidden="true"
                       viewBox="0 0 24 24"
                       className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      fill="currentColor"
                     >
-                      <circle cx="12" cy="8" r="4" />
-                      <path d="M4 20a8 8 0 0 1 16 0" />
+                      <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0 12c-4.42 0-8 2.24-8 5v3h16v-3c0-2.76-3.58-5-8-5Z" />
                     </svg>
                     My Account
                   </Link>
                   <button
                     type="button"
-                    className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-white/15"
+                    className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-white/15"
                     onClick={handleLogout}
                   >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M10 17l5-5-5-5" />
-                      <path d="M15 12H3" />
-                      <path d="M20 4v16" />
-                    </svg>
                     Sign out
                   </button>
                 </>
@@ -143,41 +113,14 @@ const SiteLayout = () => {
                 <>
                   <Link
                     to="/login"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
+                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
                   >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M10 17l5-5-5-5" />
-                      <path d="M15 12H3" />
-                      <path d="M20 4v16" />
-                    </svg>
                     Sign in
                   </Link>
                   <Link
                     to="/signup"
-                    className="inline-flex items-center gap-2 rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
+                    className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
                   >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 5v14" />
-                      <path d="M5 12h14" />
-                    </svg>
                     Sign up
                   </Link>
                 </>

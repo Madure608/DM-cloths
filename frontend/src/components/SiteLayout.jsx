@@ -28,9 +28,7 @@ const SiteLayout = () => {
               <span className="h-2 w-2 rounded-full bg-brandBlue shadow-[0_0_8px_rgba(31,75,153,0.8)]" />
               Delivering across Sri Lanka
             </span>
-            <div className="flex flex-wrap items-center gap-5">
-              <span className="text-white/80">Hotline: 076-364-9510</span>
-            </div>
+            <div className="flex flex-wrap items-center gap-5" />
           </div>
         </div>
 
@@ -193,6 +191,7 @@ const SiteLayout = () => {
             >
               Admin
             </Link>
+            <span className="text-[11px] text-white/70">Hotline: 076-364-9510</span>
             <span className="text-[11px] text-white/70">hello@dmcloths.lk</span>
           </div>
         </div>

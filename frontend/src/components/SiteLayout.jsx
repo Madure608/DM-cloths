@@ -169,30 +169,42 @@ const SiteLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="border-t border-white/20 bg-ink text-white">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <footer className="border-t border-white/10 bg-ink text-white">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="grid gap-3">
-            <p className="font-display text-2xl tracking-[0.2em]">DM CLOTHS</p>
+            <p className="font-display text-2xl tracking-[0.25em]">DM CLOTHS</p>
             <p className="text-sm text-white/70">
               Custom tees with a marketplace feel: fresh drops, fast checkout,
               and island-wide delivery.
             </p>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            <Link to="/customize">Start customizing</Link>
-            <Link to="/login">My account</Link>
-            <Link to="/signup">Create account</Link>
+          <div className="grid gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+            <span className="text-[10px] text-white/50">Quick links</span>
+            <Link to="/customize" className="hover:text-white">
+              Start customizing
+            </Link>
+            <Link to="/login" className="hover:text-white">
+              My account
+            </Link>
+            <Link to="/signup" className="hover:text-white">
+              Create account
+            </Link>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
-            <a href="/#faq">Help center</a>
+          <div className="grid gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+            <span className="text-[10px] text-white/50">Support</span>
+            <a href="/#faq" className="hover:text-white">
+              Help center
+            </a>
+            <div className="mt-1 grid gap-2 text-[11px] text-white/70">
+              <span>Hotline: 076-364-9510</span>
+              <span>hello@dmcloths.lk</span>
+            </div>
             <Link
               to="/admin/login"
-              className="w-fit rounded-full border border-white/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em]"
+              className="mt-2 w-fit rounded-full border border-white/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 hover:text-white"
             >
               Admin
             </Link>
-            <span className="text-[11px] text-white/70">Hotline: 076-364-9510</span>
-            <span className="text-[11px] text-white/70">hello@dmcloths.lk</span>
           </div>
         </div>
       </footer>

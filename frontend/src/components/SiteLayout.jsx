@@ -200,6 +200,25 @@ const SiteLayout = () => {
               <span>Hotline: 076-364-9510</span>
               <span>hello@dmcloths.lk</span>
             </div>
+            <div className="mt-2 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-white/70">
+              <a
+                href="https://www.facebook.com/profile.php?id=61587798652228"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                Facebook
+              </a>
+              <span className="h-3 w-px bg-white/20" />
+              <a
+                href="https://tiktok.com/@glowy.clothes7"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                TikTok
+              </a>
+            </div>
             <Link
               to="/admin/login"
               className="mt-2 w-fit rounded-full border border-white/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/80 hover:text-white"

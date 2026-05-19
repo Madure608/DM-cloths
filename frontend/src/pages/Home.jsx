@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchTShirts } from "../api/user";
+import homePostImage from "../assets/WhatsApp Image 2026-05-19 at 9.11.11 PM.jpeg";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 14 },
@@ -145,6 +146,20 @@ const Home = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate">
+            Featured post
+          </p>
+          <div className="mt-4 overflow-hidden rounded-2xl border border-borderSoft">
+            <img
+              src={homePostImage}
+              alt="DM CLOTHS featured post"
+              className="h-64 w-full object-cover sm:h-80"
+              loading="lazy"
+            />
           </div>
         </div>
 

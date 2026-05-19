@@ -78,7 +78,7 @@ const Home = () => {
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/customize"
-                className="rounded-full bg-brandOrange px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white"
+                className="rounded-full bg-brandBlue px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white"
               >
                 Start customizing
               </Link>

@@ -56,7 +56,7 @@ const SiteLayout = () => {
               />
               <button
                 type="button"
-                className="rounded-full bg-brandOrange px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
               >
                 Search
               </button>

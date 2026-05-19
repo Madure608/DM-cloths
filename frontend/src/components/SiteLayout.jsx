@@ -21,23 +21,23 @@ const SiteLayout = () => {
 
   return (
     <div className="min-h-screen bg-mist text-ink">
-      <header className="sticky top-0 z-30 shadow-sm">
-        <div className="bg-ink text-white">
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em]">
+      <header className="sticky top-0 z-30 bg-ink/95 text-white shadow-sm backdrop-blur">
+        <div className="border-b border-white/10">
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em] text-white/80">
             <span>Delivering across Sri Lanka</span>
             <div className="flex flex-wrap items-center gap-4">
               <span>Hotline: 076-364-9510</span>
-              <Link to="/admin/login" className="underline">
+              <Link to="/admin/login" className="underline underline-offset-4">
                 Sell on DM
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="bg-ink text-white">
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
+        <div>
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-4 md:py-5">
             <Link to="/" className="flex items-center gap-3">
-              <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brandOrangeSoft">
+              <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15">
                 <img
                   src={logo}
                   alt="DM Cloths"
@@ -49,14 +49,14 @@ const SiteLayout = () => {
               </span>
             </Link>
 
-            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-borderSoft bg-white px-4 py-2 shadow-sm">
+            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 shadow-sm backdrop-blur">
               <input
-                className="w-full border-none bg-transparent text-sm outline-none"
+                className="w-full border-none bg-transparent text-sm text-white placeholder:text-white/60 outline-none"
                 placeholder="Search tees, colors, collections"
               />
               <button
                 type="button"
-                className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
               >
                 Search
               </button>
@@ -65,7 +65,7 @@ const SiteLayout = () => {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 to="/cart"
-                className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
               >
                 Cart
               </Link>
@@ -73,13 +73,13 @@ const SiteLayout = () => {
                 <>
                   <Link
                     to="/account"
-                    className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
                   >
                     My Account
                   </Link>
                   <button
                     type="button"
-                    className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                    className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-white/15"
                     onClick={handleLogout}
                   >
                     Sign out
@@ -89,13 +89,13 @@ const SiteLayout = () => {
                 <>
                   <Link
                     to="/login"
-                    className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
                   >
                     Sign in
                   </Link>
                   <Link
                     to="/signup"
-                    className="rounded-full bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
+                    className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
                   >
                     Sign up
                   </Link>
@@ -104,13 +104,23 @@ const SiteLayout = () => {
             </div>
           </div>
 
-          <div className="border-t border-white/20">
-            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white/70">
-              <Link to="/">Home</Link>
-              <Link to="/customize">Customize</Link>
-              <a href="/#collection">New arrivals</a>
-              <a href="/#flash">Flash sale</a>
-              <a href="/#faq">Support</a>
+          <div className="border-t border-white/10">
+            <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white/70">
+              <Link to="/" className="hover:text-white">
+                Home
+              </Link>
+              <Link to="/customize" className="hover:text-white">
+                Customize
+              </Link>
+              <a href="/#collection" className="hover:text-white">
+                New arrivals
+              </a>
+              <a href="/#flash" className="hover:text-white">
+                Flash sale
+              </a>
+              <a href="/#faq" className="hover:text-white">
+                Support
+              </a>
             </div>
           </div>
         </div>

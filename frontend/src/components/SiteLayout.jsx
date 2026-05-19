@@ -170,15 +170,16 @@ const SiteLayout = () => {
       </main>
 
       <footer className="border-t border-white/10 bg-ink text-white">
-        <div className="mx-auto grid w-full max-w-7xl gap-8 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="grid gap-3">
-            <p className="font-display text-2xl tracking-[0.25em]">DM CLOTHS</p>
+            <p className="font-display text-2xl tracking-[0.3em]">DM CLOTHS</p>
             <p className="text-sm text-white/70">
               Custom tees with a marketplace feel: fresh drops, fast checkout,
               and island-wide delivery.
             </p>
+            <div className="mt-4 h-px w-16 bg-white/20" />
           </div>
-          <div className="grid gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-white/70">
             <span className="text-[10px] text-white/50">Quick links</span>
             <Link to="/customize" className="hover:text-white">
               Start customizing
@@ -190,7 +191,7 @@ const SiteLayout = () => {
               Create account
             </Link>
           </div>
-          <div className="grid gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-white/70">
             <span className="text-[10px] text-white/50">Support</span>
             <a href="/#faq" className="hover:text-white">
               Help center
@@ -201,7 +202,7 @@ const SiteLayout = () => {
             </div>
             <Link
               to="/admin/login"
-              className="mt-2 w-fit rounded-full border border-white/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 hover:text-white"
+              className="mt-2 w-fit rounded-full border border-white/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/80 hover:text-white"
             >
               Admin
             </Link>

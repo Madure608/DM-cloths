@@ -27,10 +27,6 @@ const createOrderIntent = async (req, res) => {
     selectedSize,
   } = req.body;
 
-  if (!req.file) {
-    return res.status(400).json({ message: "Sticker image is required" });
-  }
-
   if (!selectedTShirtId || !selectedColor || !selectedSize) {
     return res.status(400).json({ message: "Missing order data" });
   }
@@ -40,7 +36,11 @@ const createOrderIntent = async (req, res) => {
     return res.status(404).json({ message: "T-shirt not found" });
   }
 
-  const uploadResult = await uploadStickerToCloudinary(req.file.buffer);
+  let uploadedStickerUrl = "";
+  if (req.file) {
+    const uploadResult = await uploadStickerToCloudinary(req.file.buffer);
+    uploadedStickerUrl = uploadResult.secure_url;
+  }
 
   const orderIntent = await OrderIntent.create({
     customerName: customerName || "",
@@ -48,13 +48,13 @@ const createOrderIntent = async (req, res) => {
     selectedTShirtId,
     selectedColor,
     selectedSize,
-    uploadedStickerUrl: uploadResult.secure_url,
+    uploadedStickerUrl,
     status: "pending",
   });
 
   return res.status(201).json({
     orderIntent,
-    uploadedStickerUrl: uploadResult.secure_url,
+    uploadedStickerUrl,
   });
 };
 

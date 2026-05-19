@@ -30,8 +30,8 @@ const orderIntentSchema = new mongoose.Schema(
     },
     uploadedStickerUrl: {
       type: String,
-      required: true,
       trim: true,
+      default: "",
     },
     status: {
       type: String,

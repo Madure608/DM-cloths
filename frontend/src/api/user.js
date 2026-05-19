@@ -14,6 +14,12 @@ const loginUser = (payload) =>
     body: JSON.stringify(payload),
   });
 
+const confirmOrder = (payload) =>
+  request("/api/orders/confirm", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
 const createOrderIntent = async (payload) => {
   const response = await fetch(`${API_BASE_URL}/api/orders/intent`, {
     method: "POST",
@@ -35,4 +41,10 @@ const createOrderIntent = async (payload) => {
   return data;
 };
 
-export { fetchTShirts, createOrderIntent, registerUser, loginUser };
+export {
+  fetchTShirts,
+  createOrderIntent,
+  confirmOrder,
+  registerUser,
+  loginUser,
+};

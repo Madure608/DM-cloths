@@ -1,42 +1,45 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { confirmOrder } from "../api/user";
 
 const Cart = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const storedCart = useSelector((state) => state.cart.item);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const stored = useMemo(() => {
     const raw = sessionStorage.getItem("dm_cart");
     return raw ? JSON.parse(raw) : null;
   }, []);
 
   const cart = location.state || storedCart || stored;
-  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER;
-
-  const handleCheckout = () => {
-    if (!whatsappNumber) {
-      setError("WhatsApp number is missing in environment settings.");
-      return;
-    }
+  const handleCheckout = async () => {
+    setError("");
+    setSuccess("");
 
     if (!cart) {
       setError("Cart data is missing.");
       return;
     }
 
-    const message =
-      "Hello DM CLOTHS! I want to order: " +
-      `T-Shirt Color: ${cart.color}, ` +
-      `Size: ${cart.size}, ` +
-      `Sticker Link: ${cart.stickerUrl}, ` +
-      `Total: Rs.${cart.price}`;
+    if (!cart.orderIntentId) {
+      setError("Order intent is missing. Please customize again.");
+      return;
+    }
 
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.location.href = url;
+    try {
+      setSubmitting(true);
+      await confirmOrder({ orderIntentId: cart.orderIntentId });
+      setSuccess("Order confirmed. We will contact you soon.");
+      sessionStorage.removeItem("dm_cart");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -96,12 +99,18 @@ const Cart = () => {
                   {error}
                 </p>
               )}
+              {success && (
+                <p className="mt-4 rounded-2xl border border-emerald/30 bg-emerald/10 px-4 py-2 text-sm text-emerald">
+                  {success}
+                </p>
+              )}
               <button
                 type="button"
                 className="mt-6 h-11 w-full rounded-full bg-brandOrange text-xs font-semibold uppercase tracking-[0.2em] text-white"
                 onClick={handleCheckout}
+                disabled={submitting}
               >
-                Checkout on WhatsApp
+                {submitting ? "Confirming..." : "Confirm order"}
               </button>
               <button
                 type="button"

@@ -7,6 +7,8 @@ import {
   fetchTShirts,
   updateTShirt,
 } from "../../api/admin";
+import { API_BASE_URL } from "../../api/client";
+import { io } from "socket.io-client";
 
 const sizeOptions = ["S", "M", "L", "XL"];
 
@@ -84,6 +86,23 @@ const AdminDashboard = () => {
     if (token) {
       loadData();
     }
+  }, [token]);
+
+  useEffect(() => {
+    if (!token) return undefined;
+
+    const socket = io(API_BASE_URL, {
+      transports: ["websocket"],
+    });
+
+    socket.on("order:confirmed", () => {
+      setMessage("New order confirmed.");
+      loadData();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [token]);
 
   const buildPayload = () => {

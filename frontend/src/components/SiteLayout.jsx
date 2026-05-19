@@ -24,10 +24,16 @@ const SiteLayout = () => {
       <header className="sticky top-0 z-30 bg-ink/95 text-white shadow-sm backdrop-blur">
         <div className="border-b border-white/10">
           <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em] text-white/80">
-            <span>Delivering across Sri Lanka</span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-brandBlue" />
+              Delivering across Sri Lanka
+            </span>
             <div className="flex flex-wrap items-center gap-4">
               <span>Hotline: 076-364-9510</span>
-              <Link to="/admin/login" className="underline underline-offset-4">
+              <Link
+                to="/admin/login"
+                className="underline underline-offset-4 hover:text-white"
+              >
                 Sell on DM
               </Link>
             </div>
@@ -36,7 +42,7 @@ const SiteLayout = () => {
 
         <div>
           <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-4 md:py-5">
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="group flex items-center gap-3">
               <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15">
                 <img
                   src={logo}
@@ -44,12 +50,12 @@ const SiteLayout = () => {
                   className="h-10 w-10 rounded-xl object-cover"
                 />
               </span>
-              <span className="font-display text-3xl tracking-[0.2em]">
+              <span className="font-display text-3xl tracking-[0.2em] group-hover:text-white">
                 DM CLOTHS
               </span>
             </Link>
 
-            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 shadow-sm backdrop-blur">
+            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 shadow-sm backdrop-blur focus-within:border-brandBlue/70 focus-within:shadow">
               <input
                 className="w-full border-none bg-transparent text-sm text-white placeholder:text-white/60 outline-none"
                 placeholder="Search tees, colors, collections"
@@ -130,19 +136,34 @@ const SiteLayout = () => {
 
           <div className="border-t border-white/10">
             <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white/70">
-              <Link to="/" className="hover:text-white">
+              <Link
+                to="/"
+                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
+              >
                 Home
               </Link>
-              <Link to="/customize" className="hover:text-white">
+              <Link
+                to="/customize"
+                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
+              >
                 Customize
               </Link>
-              <a href="/#collection" className="hover:text-white">
+              <a
+                href="/#collection"
+                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
+              >
                 New arrivals
               </a>
-              <a href="/#flash" className="hover:text-white">
+              <a
+                href="/#flash"
+                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
+              >
                 Flash sale
               </a>
-              <a href="/#faq" className="hover:text-white">
+              <a
+                href="/#faq"
+                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
+              >
                 Support
               </a>
             </div>

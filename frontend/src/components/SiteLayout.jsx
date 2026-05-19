@@ -23,16 +23,17 @@ const SiteLayout = () => {
     <div className="min-h-screen bg-mist text-ink">
       <header className="sticky top-0 z-30 bg-ink/95 text-white shadow-sm backdrop-blur">
         <div className="border-b border-white/10">
-          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em] text-white/80">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-brandBlue" />
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-2 text-[11px] uppercase tracking-[0.28em] text-white/70">
+            <span className="inline-flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-brandBlue shadow-[0_0_8px_rgba(31,75,153,0.8)]" />
               Delivering across Sri Lanka
             </span>
-            <div className="flex flex-wrap items-center gap-4">
-              <span>Hotline: 076-364-9510</span>
+            <div className="flex flex-wrap items-center gap-5">
+              <span className="text-white/80">Hotline: 076-364-9510</span>
+              <span className="h-3 w-px bg-white/20" />
               <Link
                 to="/admin/login"
-                className="underline underline-offset-4 hover:text-white"
+                className="rounded-full border border-white/20 px-3 py-1 text-[10px] font-semibold tracking-[0.35em] text-white/90 hover:text-white"
               >
                 Sell on DM
               </Link>

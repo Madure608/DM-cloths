@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        brandOrange: "#f85606",
-        brandOrangeDark: "#e24b00",
+        brandOrange: "#1f4b99",
+        brandOrangeDark: "#173b7a",
         brandOrangeSoft: "#d7ecff",
         brandYellow: "#ffd166",
         brandBlue: "#1f4b99",

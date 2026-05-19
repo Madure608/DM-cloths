@@ -354,7 +354,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="rounded-3xl bg-brandOrange px-8 py-10 text-white">
+        <div className="rounded-3xl bg-brandBlue px-8 py-10 text-white">
           <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="grid gap-3">
               <p className="text-xs uppercase tracking-[0.3em] text-white/70">

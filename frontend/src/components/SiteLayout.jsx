@@ -30,13 +30,6 @@ const SiteLayout = () => {
             </span>
             <div className="flex flex-wrap items-center gap-5">
               <span className="text-white/80">Hotline: 076-364-9510</span>
-              <span className="h-3 w-px bg-white/20" />
-              <Link
-                to="/admin/login"
-                className="rounded-full border border-white/20 px-3 py-1 text-[10px] font-semibold tracking-[0.35em] text-white/90 hover:text-white"
-              >
-                Sell on DM
-              </Link>
             </div>
           </div>
         </div>

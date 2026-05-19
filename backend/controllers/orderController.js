@@ -74,6 +74,7 @@ const createOrderIntent = async (req, res) => {
   const orderIntent = await OrderIntent.create({
     customerName: customerName || "",
     phoneNumber: phoneNumber || "",
+    userId: req.user?._id || null,
     selectedTShirtId,
     selectedColor,
     selectedSize,
@@ -139,4 +140,16 @@ const listOrderIntents = async (req, res) => {
   return res.json(intents);
 };
 
-module.exports = { createOrderIntent, confirmOrder, listOrderIntents };
+const listUserOrderIntents = async (req, res) => {
+  const intents = await OrderIntent.find({ userId: req.user._id })
+    .populate("selectedTShirtId")
+    .sort({ createdAt: -1 });
+  return res.json(intents);
+};
+
+module.exports = {
+  createOrderIntent,
+  confirmOrder,
+  listOrderIntents,
+  listUserOrderIntents,
+};

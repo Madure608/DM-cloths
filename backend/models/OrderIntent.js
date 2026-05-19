@@ -12,6 +12,11 @@ const orderIntentSchema = new mongoose.Schema(
       trim: true,
       default: "",
     },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
     selectedTShirtId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "TShirt",

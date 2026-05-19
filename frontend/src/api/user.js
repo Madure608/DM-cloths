@@ -1,4 +1,4 @@
-import { API_BASE_URL, request } from "./client";
+import { API_BASE_URL, getUserAuthHeader, request } from "./client";
 
 const fetchTShirts = () => request("/api/tshirts");
 
@@ -23,6 +23,9 @@ const confirmOrder = (payload) =>
 const createOrderIntent = async (payload) => {
   const response = await fetch(`${API_BASE_URL}/api/orders/intent`, {
     method: "POST",
+    headers: {
+      ...getUserAuthHeader(),
+    },
     body: payload,
   });
 
@@ -41,10 +44,16 @@ const createOrderIntent = async (payload) => {
   return data;
 };
 
+const fetchMyOrders = () =>
+  request("/api/orders/my-intents", {
+    headers: getUserAuthHeader(),
+  });
+
 export {
   fetchTShirts,
   createOrderIntent,
   confirmOrder,
+  fetchMyOrders,
   registerUser,
   loginUser,
 };

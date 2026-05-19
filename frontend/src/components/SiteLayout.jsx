@@ -26,7 +26,7 @@ const SiteLayout = () => {
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em]">
             <span>Delivering across Sri Lanka</span>
             <div className="flex flex-wrap items-center gap-4">
-              <span>Hotline: 011-555-1212</span>
+              <span>Hotline: 076-364-9510</span>
               <Link to="/admin/login" className="underline">
                 Sell on DM
               </Link>

@@ -205,8 +205,16 @@ const SiteLayout = () => {
                 href="https://www.facebook.com/profile.php?id=61587798652228"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-white"
               >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="currentColor"
+                >
+                  <path d="M13 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1Z" />
+                </svg>
                 Facebook
               </a>
               <span className="h-3 w-px bg-white/20" />
@@ -214,8 +222,16 @@ const SiteLayout = () => {
                 href="https://tiktok.com/@glowy.clothes7"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-white"
               >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="currentColor"
+                >
+                  <path d="M16.5 3c.4 2.1 1.9 3.6 4 4v3.1c-1.5 0-3-.5-4-1.4V15a6 6 0 1 1-6-6c.4 0 .7 0 1 .1V12a3 3 0 1 0 2.5 2.9V3h2.5Z" />
+                </svg>
                 TikTok
               </a>
             </div>

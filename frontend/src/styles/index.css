@@ -9,10 +9,10 @@
   color-scheme: only light;
   --brand: #f85606;
   --brand-dark: #e24b00;
-  --brand-soft: #ffefe7;
+  --brand-soft: #d7ecff;
   --ink: #1b1b1b;
   --slate: #6b7280;
-  --mist: #f8fafc;
+  --mist: #c6e2ff;
   --cloud: #ffffff;
 }
 
@@ -21,9 +21,9 @@ body {
   min-height: 100vh;
   background-color: var(--mist);
   color: var(--ink);
-  background-image: radial-gradient(circle at 15% 0%, #fff3ea 0%, transparent 45%),
-    radial-gradient(circle at 90% 10%, #fff7f0 0%, transparent 40%),
-    linear-gradient(180deg, #fff8f3 0%, #f8fafc 55%, #f3f6fb 100%);
+  background-image: radial-gradient(circle at 15% 0%, #dbeeff 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #d2e8ff 0%, transparent 40%),
+    linear-gradient(180deg, #e5f2ff 0%, #c6e2ff 55%, #bcdcff 100%);
   background-attachment: fixed;
 }
 

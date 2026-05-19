@@ -22,7 +22,7 @@ const SiteLayout = () => {
   return (
     <div className="min-h-screen bg-mist text-ink">
       <header className="sticky top-0 z-30 shadow-sm">
-        <div className="bg-brandOrange text-white">
+        <div className="bg-ink text-white">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em]">
             <span>Delivering across Sri Lanka</span>
             <div className="flex flex-wrap items-center gap-4">
@@ -34,7 +34,7 @@ const SiteLayout = () => {
           </div>
         </div>
 
-        <div className="bg-cloud">
+        <div className="bg-ink text-white">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
             <Link to="/" className="flex items-center gap-3">
               <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-brandOrangeSoft">
@@ -104,8 +104,8 @@ const SiteLayout = () => {
             </div>
           </div>
 
-          <div className="border-t border-borderSoft">
-            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-slate">
+          <div className="border-t border-white/20">
+            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white/70">
               <Link to="/">Home</Link>
               <Link to="/customize">Customize</Link>
               <a href="/#collection">New arrivals</a>
@@ -122,29 +122,29 @@ const SiteLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="border-t border-borderSoft bg-white">
+      <footer className="border-t border-white/20 bg-ink text-white">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="grid gap-3">
             <p className="font-display text-2xl tracking-[0.2em]">DM CLOTHS</p>
-            <p className="text-sm text-slate">
+            <p className="text-sm text-white/70">
               Custom tees with a marketplace feel: fresh drops, fast checkout,
               and island-wide delivery.
             </p>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-slate">
+          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
             <Link to="/customize">Start customizing</Link>
             <Link to="/login">My account</Link>
             <Link to="/signup">Create account</Link>
           </div>
-          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-slate">
+          <div className="grid gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
             <a href="/#faq">Help center</a>
             <Link
               to="/admin/login"
-              className="w-fit rounded-full border border-borderSoft px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em]"
+              className="w-fit rounded-full border border-white/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em]"
             >
               Admin
             </Link>
-            <span className="text-[11px] text-slate">hello@dmcloths.lk</span>
+            <span className="text-[11px] text-white/70">hello@dmcloths.lk</span>
           </div>
         </div>
       </footer>

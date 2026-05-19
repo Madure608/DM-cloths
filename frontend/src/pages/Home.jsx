@@ -104,32 +104,13 @@ const Home = () => {
           </div>
 
           <div className="grid gap-4">
-            <div className="relative overflow-hidden rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
-              <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-brandOrangeSoft blur-3xl" />
-              <div className="relative grid gap-4">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate">
-                  Today only
-                </p>
-                <h2 className="font-display text-4xl">Flash drops</h2>
-                <p className="text-sm text-slate">
-                  Top colors, hot fits, and a ready-to-print pipeline. Update
-                  your merch with zero friction.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    to="/customize"
-                    className="rounded-full bg-ink px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white"
-                  >
-                    Shop now
-                  </Link>
-                  <a
-                    href="#collection"
-                    className="rounded-full border border-borderSoft px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
-                  >
-                    View all
-                  </a>
-                </div>
-              </div>
+            <div className="overflow-hidden rounded-3xl border border-borderSoft bg-white shadow-sm">
+              <img
+                src={homePostImage}
+                alt="DM CLOTHS featured post"
+                className="h-64 w-full object-cover sm:h-80"
+                loading="lazy"
+              />
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {["Best sellers", "New prints"].map((label) => (
@@ -146,20 +127,6 @@ const Home = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate">
-            Featured post
-          </p>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-borderSoft">
-            <img
-              src={homePostImage}
-              alt="DM CLOTHS featured post"
-              className="h-64 w-full object-cover sm:h-80"
-              loading="lazy"
-            />
           </div>
         </div>
 

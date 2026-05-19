@@ -55,8 +55,11 @@ const Customize = () => {
     event.preventDefault();
     setStatus({ loading: true, error: "" });
 
-    if (!selectedTShirt || !selectedSize || !stickerFile) {
-      setStatus({ loading: false, error: "Please complete all fields." });
+    if (!selectedTShirt || !selectedSize) {
+      setStatus({
+        loading: false,
+        error: "Please select a T-shirt and size.",
+      });
       return;
     }
 
@@ -67,7 +70,9 @@ const Customize = () => {
       formData.append("selectedTShirtId", selectedTShirt._id);
       formData.append("selectedColor", selectedTShirt.color);
       formData.append("selectedSize", selectedSize);
-      formData.append("sticker", stickerFile);
+      if (stickerFile) {
+        formData.append("sticker", stickerFile);
+      }
 
       const response = await createOrderIntent(formData);
       const payload = {
@@ -75,7 +80,7 @@ const Customize = () => {
         color: selectedTShirt.color,
         size: selectedSize,
         price: selectedTShirt.price,
-        stickerUrl: response.uploadedStickerUrl,
+        stickerUrl: response.uploadedStickerUrl || "",
         orderIntentId: response.orderIntent?._id,
         customerName,
         phoneNumber,
@@ -176,13 +181,12 @@ const Customize = () => {
               </label>
 
               <label className="grid gap-2 text-sm">
-                <span className="text-slate">Upload sticker</span>
+                <span className="text-slate">Upload sticker (optional)</span>
                 <input
                   className="h-11 rounded-2xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 px-4 text-sm"
                   type="file"
                   accept="image/*"
                   onChange={(event) => setStickerFile(event.target.files?.[0])}
-                  required
                 />
               </label>
 

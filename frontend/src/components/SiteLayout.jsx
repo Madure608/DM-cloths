@@ -197,7 +197,17 @@ const SiteLayout = () => {
               Help center
             </a>
             <div className="mt-1 grid gap-2 text-[11px] text-white/70">
-              <span>Hotline: 076-364-9510</span>
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-3.5 w-3.5"
+                  fill="currentColor"
+                >
+                  <path d="M6.6 3.5 9 2.7a1.2 1.2 0 0 1 1.4.5l2.1 3.2a1.2 1.2 0 0 1-.2 1.6l-1.7 1.5a12 12 0 0 0 5 5l1.5-1.7a1.2 1.2 0 0 1 1.6-.2l3.2 2.1a1.2 1.2 0 0 1 .5 1.4l-.8 2.4a1.2 1.2 0 0 1-1.2.8C11 20.3 3.7 13 3.7 4.7a1.2 1.2 0 0 1 .9-1.2Z" />
+                </svg>
+                Hotline: 076-364-9510
+              </span>
               <span>hello@dmcloths.lk</span>
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-white/70">

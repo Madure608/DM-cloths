@@ -94,6 +94,15 @@ const AdminLogin = () => {
             {status.loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
+        <div className="mt-5 flex items-center justify-center text-sm text-clay">
+          <span>New here?</span>
+          <Link
+            className="ml-2 font-semibold text-ink underline-offset-4 hover:underline"
+            to="/admin/signup"
+          >
+            Create an admin account
+          </Link>
+        </div>
         {!checking && !hasAdmin && (
           <div className="mt-6 rounded-2xl border border-stone/40 bg-sand/70 px-4 py-4">
             <p className="text-xs uppercase tracking-[0.25em] text-clay">

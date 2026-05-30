@@ -60,6 +60,15 @@ const Home = () => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
+  const handleSelect = (tshirt) => {
+    const token = localStorage.getItem("dm_user_token");
+    if (!token) {
+      navigate("/login", { state: { redirectTo: "/customize", tshirt } });
+      return;
+    }
+    navigate("/customize", { state: { tshirt } });
+  };
+
   return (
     <div className="px-6 py-10 text-ink">
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-12">
@@ -237,9 +246,7 @@ const Home = () => {
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
-                    onClick={() =>
-                      navigate("/customize", { state: { tshirt } })
-                    }
+                    onClick={() => handleSelect(tshirt)}
                   >
                     {tshirt.imageUrl ? (
                       <img

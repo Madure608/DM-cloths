@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/user";
 
 const UserLogin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState({ loading: false, error: "" });
@@ -15,7 +16,13 @@ const UserLogin = () => {
     try {
       const data = await loginUser({ email, password });
       localStorage.setItem("dm_user_token", data.token);
-      navigate("/");
+      const redirectTo = location.state?.redirectTo || "/";
+      const tshirt = location.state?.tshirt || null;
+      if (redirectTo === "/customize" && tshirt) {
+        navigate(redirectTo, { state: { tshirt } });
+        return;
+      }
+      navigate(redirectTo);
     } catch (err) {
       setStatus({ loading: false, error: err.message });
     }

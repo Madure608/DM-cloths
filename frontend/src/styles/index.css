@@ -7,12 +7,12 @@
 :root {
   font-family: "Work Sans", sans-serif;
   color-scheme: only light;
-  --brand: #e31b23;
-  --brand-dark: #b3121b;
-  --brand-soft: #fde8ea;
-  --ink: #0f0f10;
-  --slate: #6b7280;
-  --mist: #f6f6f7;
+  --brand: #e06a5e;
+  --brand-dark: #c4564c;
+  --brand-soft: #fdebe8;
+  --ink: #1f1f1f;
+  --slate: #6d6a67;
+  --mist: #f8f3ef;
   --cloud: #ffffff;
 }
 
@@ -21,10 +21,39 @@ body {
   min-height: 100vh;
   background-color: var(--mist);
   color: var(--ink);
-  background-image: radial-gradient(circle at 10% 0%, #fff4f5 0%, transparent 45%),
-    radial-gradient(circle at 90% 15%, #fff1f2 0%, transparent 40%),
-    linear-gradient(180deg, #fafafa 0%, #f3f3f4 55%, #efeff1 100%);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image: radial-gradient(circle at 12% 0%, #fff3ef 0%, transparent 45%),
+    radial-gradient(circle at 90% 12%, #fff0ea 0%, transparent 40%),
+    linear-gradient(180deg, #fbf8f5 0%, #f4eee9 55%, #efe7e1 100%);
   background-attachment: fixed;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@layer base {
+  button {
+    min-height: 44px;
+    padding: 0.65rem 1.25rem;
+  }
+
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border-radius: 0.9rem;
+  }
 }
 
 * {

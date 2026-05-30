@@ -9,6 +9,7 @@ const ProductDetails = () => {
   const tshirt = location.state?.tshirt || null;
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [wishlistIds, setWishlistIds] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const raw = localStorage.getItem("dm_wishlist");
@@ -34,6 +35,26 @@ const ProductDetails = () => {
   useEffect(() => {
     setSelectedImage(gallery[0] || "");
   }, [gallery]);
+
+  const totalStock = useMemo(() => {
+    const sizes = tshirt?.sizesAvailable || [];
+    if (!sizes.length) return 3;
+    const sum = sizes.reduce((acc, entry) => acc + (entry.stock || 0), 0);
+    return sum || 3;
+  }, [tshirt]);
+
+  const priceValue = useMemo(() => {
+    if (!tshirt?.price) return 2990;
+    const parsed = Number.parseFloat(tshirt.price);
+    return Number.isNaN(parsed) ? 2990 : parsed;
+  }, [tshirt]);
+
+  const subtotal = priceValue * quantity;
+  const stockMax = Math.max(5, totalStock);
+  const stockPercent = Math.min(
+    100,
+    Math.round((totalStock / stockMax) * 100)
+  );
 
   const isWishlisted = wishlistIds.includes(tshirt?._id || id);
 
@@ -77,15 +98,45 @@ const ProductDetails = () => {
         </div>
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
-            {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt={tshirt?.color || "Product"}
-                className="h-[420px] w-full rounded-2xl object-cover"
-              />
-            ) : (
-              <div className="h-[420px] w-full rounded-2xl bg-brandOrangeSoft" />
-            )}
+            <div className="relative">
+              {selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt={tshirt?.color || "Product"}
+                  className="h-[420px] w-full rounded-2xl object-cover"
+                />
+              ) : (
+                <div className="h-[420px] w-full rounded-2xl bg-brandOrangeSoft" />
+              )}
+              <button
+                type="button"
+                className="absolute left-4 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-borderSoft bg-white/90 text-lg"
+                onClick={() => {
+                  if (!gallery.length) return;
+                  const index = gallery.indexOf(selectedImage);
+                  const nextIndex =
+                    index <= 0 ? gallery.length - 1 : index - 1;
+                  setSelectedImage(gallery[nextIndex]);
+                }}
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-borderSoft bg-white/90 text-lg"
+                onClick={() => {
+                  if (!gallery.length) return;
+                  const index = gallery.indexOf(selectedImage);
+                  const nextIndex =
+                    index === -1 || index === gallery.length - 1 ? 0 : index + 1;
+                  setSelectedImage(gallery[nextIndex]);
+                }}
+                aria-label="Next image"
+              >
+                ›
+              </button>
+            </div>
             <div className="mt-4 grid gap-3">
               <div className="grid grid-cols-3 gap-3">
                 {gallery.length > 0
@@ -133,17 +184,27 @@ const ProductDetails = () => {
               </p>
               <div className="mt-5 flex items-center justify-between">
                 <span className="text-2xl font-semibold text-ink">
-                  Rs. {tshirt?.price || "2,990"}
+                  Rs. {priceValue.toLocaleString()}
                 </span>
-                <button
-                  type="button"
-                  className={`rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] ${
-                    isWishlisted ? "text-brandOrange" : "text-ink"
-                  }`}
-                  onClick={toggleWishlist}
-                >
-                  ❤ {isWishlisted ? "Wishlisted" : "Add to wish list"}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    className={`grid h-10 w-10 place-items-center rounded-full border border-borderSoft text-base ${
+                      isWishlisted ? "text-brandOrange" : "text-ink"
+                    }`}
+                    onClick={toggleWishlist}
+                    aria-label="Toggle wishlist"
+                  >
+                    ❤
+                  </button>
+                  <button
+                    type="button"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-borderSoft text-base"
+                    aria-label="Share"
+                  >
+                    ⤴
+                  </button>
+                </div>
               </div>
               <div className="mt-6 grid gap-3">
                 <p className="text-xs uppercase tracking-[0.3em] text-slate">
@@ -169,19 +230,59 @@ const ProductDetails = () => {
                   View size guide
                 </button>
               </div>
+              <div className="mt-6 grid gap-3">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate">
+                  Quantity
+                </p>
+                <div className="flex w-fit items-center gap-2 rounded-full border border-borderSoft px-3 py-2">
+                  <button
+                    type="button"
+                    className="h-8 w-8 rounded-full border border-borderSoft text-lg"
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                  >
+                    -
+                  </button>
+                  <span className="w-8 text-center text-sm font-semibold">
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    className="h-8 w-8 rounded-full border border-borderSoft text-lg"
+                    onClick={() =>
+                      setQuantity((prev) =>
+                        Math.min(totalStock, prev + 1)
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="text-sm text-slate">
+                  Subtotal: Rs. {subtotal.toLocaleString()}
+                </p>
+                <div className="text-xs text-brandOrange">
+                  Please hurry! Only {totalStock} left in stock
+                </div>
+                <div className="h-1 rounded-full bg-borderSoft">
+                  <div
+                    className="h-full rounded-full bg-brandOrange"
+                    style={{ width: `${stockPercent}%` }}
+                  />
+                </div>
+              </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button
                   type="button"
-                  className="h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.25em] text-white"
+                  className="h-11 flex-1 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.25em] text-white"
                   onClick={() => navigate("/customize", { state: { tshirt } })}
                 >
-                  Customize this item
+                  Add to cart
                 </button>
                 <button
                   type="button"
-                  className="h-11 rounded-full border border-borderSoft px-6 text-xs font-semibold uppercase tracking-[0.25em]"
+                  className="h-11 flex-1 rounded-full border border-borderSoft px-6 text-xs font-semibold uppercase tracking-[0.25em]"
                 >
-                  Add to cart
+                  Buy it now
                 </button>
               </div>
             </div>

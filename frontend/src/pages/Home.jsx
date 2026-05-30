@@ -78,12 +78,7 @@ const Home = () => {
   });
 
   const handleSelect = (tshirt) => {
-    const token = localStorage.getItem("dm_user_token");
-    if (!token) {
-      navigate("/login", { state: { redirectTo: "/customize", tshirt } });
-      return;
-    }
-    navigate("/customize", { state: { tshirt } });
+    navigate(`/product/${tshirt._id}`, { state: { tshirt } });
   };
 
   const toggleWishlist = (id) => {

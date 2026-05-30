@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchTShirts, createOrderIntent } from "../api/user";
 import { setCart } from "../store/cartSlice";
+import SizeGuideModal from "../components/SizeGuideModal.jsx";
 
 const Customize = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Customize = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [stickerFile, setStickerFile] = useState(null);
   const [preview, setPreview] = useState("");
+  const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [status, setStatus] = useState({ loading: false, error: "" });
   const [loadingStock, setLoadingStock] = useState(true);
 
@@ -164,6 +166,7 @@ const Customize = () => {
                 <button
                   type="button"
                   className="w-fit text-[11px] uppercase tracking-[0.3em] text-brandOrange"
+                  onClick={() => setShowSizeGuide(true)}
                 >
                   View size guide
                 </button>
@@ -249,6 +252,10 @@ const Customize = () => {
           </div>
         </div>
       </section>
+      <SizeGuideModal
+        open={showSizeGuide}
+        onClose={() => setShowSizeGuide(false)}
+      />
     </main>
   );
 };

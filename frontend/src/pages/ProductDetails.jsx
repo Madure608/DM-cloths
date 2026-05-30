@@ -1,10 +1,73 @@
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import SizeGuideModal from "../components/SizeGuideModal.jsx";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
   const tshirt = location.state?.tshirt || null;
+  const [showSizeGuide, setShowSizeGuide] = useState(false);
+  const [wishlistIds, setWishlistIds] = useState([]);
+
+  useEffect(() => {
+    const raw = localStorage.getItem("dm_wishlist");
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          setWishlistIds(parsed);
+        }
+      } catch (err) {
+        setWishlistIds([]);
+      }
+    }
+  }, []);
+
+  const gallery = useMemo(() => {
+    if (!tshirt?.imageUrl) return [];
+    return [tshirt.imageUrl, tshirt.imageUrl, tshirt.imageUrl];
+  }, [tshirt]);
+
+  const [selectedImage, setSelectedImage] = useState("");
+
+  useEffect(() => {
+    setSelectedImage(gallery[0] || "");
+  }, [gallery]);
+
+  const isWishlisted = wishlistIds.includes(tshirt?._id || id);
+
+  const toggleWishlist = () => {
+    const itemId = tshirt?._id || id;
+    setWishlistIds((prev) => {
+      const next = prev.includes(itemId)
+        ? prev.filter((entry) => entry !== itemId)
+        : [...prev, itemId];
+      localStorage.setItem("dm_wishlist", JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const relatedItems = useMemo(
+    () => [
+      {
+        id: "rel-1",
+        title: "Soft ash tee",
+        price: "2,750",
+      },
+      {
+        id: "rel-2",
+        title: "Jet black tee",
+        price: "2,990",
+      },
+      {
+        id: "rel-3",
+        title: "Monochrome tee",
+        price: "2,500",
+      },
+    ],
+    []
+  );
 
   return (
     <main className="min-h-screen bg-mist px-6 py-12 text-ink">
@@ -14,20 +77,49 @@ const ProductDetails = () => {
         </div>
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
-            {tshirt?.imageUrl ? (
+            {selectedImage ? (
               <img
-                src={tshirt.imageUrl}
-                alt={tshirt.color}
+                src={selectedImage}
+                alt={tshirt?.color || "Product"}
                 className="h-[420px] w-full rounded-2xl object-cover"
               />
             ) : (
               <div className="h-[420px] w-full rounded-2xl bg-brandOrangeSoft" />
             )}
-            <div className="mt-4 grid gap-2 text-sm text-slate">
-              <span className="text-xs uppercase tracking-[0.3em] text-brandOrange">
-                New arrivals
-              </span>
-              <span>Product code: {id?.slice(0, 6) || "NEW"}</span>
+            <div className="mt-4 grid gap-3">
+              <div className="grid grid-cols-3 gap-3">
+                {gallery.length > 0
+                  ? gallery.map((image, index) => (
+                      <button
+                        key={`${image}-${index}`}
+                        type="button"
+                        className={`overflow-hidden rounded-2xl border ${
+                          selectedImage === image
+                            ? "border-brandOrange"
+                            : "border-borderSoft"
+                        }`}
+                        onClick={() => setSelectedImage(image)}
+                      >
+                        <img
+                          src={image}
+                          alt="Product thumbnail"
+                          className="h-24 w-full object-cover"
+                        />
+                      </button>
+                    ))
+                  : [0, 1, 2].map((index) => (
+                      <div
+                        key={`placeholder-${index}`}
+                        className="h-24 rounded-2xl border border-borderSoft bg-brandOrangeSoft"
+                      />
+                    ))}
+              </div>
+              <div className="grid gap-2 text-sm text-slate">
+                <span className="text-xs uppercase tracking-[0.3em] text-brandOrange">
+                  New arrivals
+                </span>
+                <span>Product code: {id?.slice(0, 6) || "NEW"}</span>
+              </div>
             </div>
           </div>
 
@@ -45,9 +137,12 @@ const ProductDetails = () => {
                 </span>
                 <button
                   type="button"
-                  className="rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em]"
+                  className={`rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] ${
+                    isWishlisted ? "text-brandOrange" : "text-ink"
+                  }`}
+                  onClick={toggleWishlist}
                 >
-                  ❤ Add to wish list
+                  ❤ {isWishlisted ? "Wishlisted" : "Add to wish list"}
                 </button>
               </div>
               <div className="mt-6 grid gap-3">
@@ -69,6 +164,7 @@ const ProductDetails = () => {
                 <button
                   type="button"
                   className="mt-2 w-fit text-xs uppercase tracking-[0.3em] text-brandOrange"
+                  onClick={() => setShowSizeGuide(true)}
                 >
                   View size guide
                 </button>
@@ -102,7 +198,42 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+
+        <div className="mt-10 rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-2xl">Related products</h2>
+            <span className="text-xs uppercase tracking-[0.3em] text-slate">
+              You may also like
+            </span>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {relatedItems.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-3xl border border-borderSoft bg-cream p-5"
+              >
+                <div className="h-40 rounded-2xl bg-brandOrangeSoft" />
+                <p className="mt-4 text-xs uppercase tracking-[0.3em] text-slate">
+                  {item.title}
+                </p>
+                <p className="mt-2 text-sm font-semibold text-ink">
+                  Rs. {item.price}
+                </p>
+                <button
+                  type="button"
+                  className="mt-4 w-full rounded-full border border-borderSoft px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em]"
+                >
+                  View details
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
+      <SizeGuideModal
+        open={showSizeGuide}
+        onClose={() => setShowSizeGuide(false)}
+      />
     </main>
   );
 };

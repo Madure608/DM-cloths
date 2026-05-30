@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchTShirts } from "../api/user";
 import homePostImage from "../assets/WhatsApp Image 2026-05-19 at 9.11.11 PM.jpeg";
+import SizeGuideModal from "../components/SizeGuideModal.jsx";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 14 },
@@ -20,6 +21,8 @@ const Home = () => {
   const [error, setError] = useState("");
   const [colorFilter, setColorFilter] = useState("all");
   const [sortBy, setSortBy] = useState("latest");
+  const [showSizeGuide, setShowSizeGuide] = useState(false);
+  const [wishlistIds, setWishlistIds] = useState([]);
   const categories = [
     "Streetwear",
     "Minimal",
@@ -42,6 +45,20 @@ const Home = () => {
     };
 
     load();
+  }, []);
+
+  useEffect(() => {
+    const raw = localStorage.getItem("dm_wishlist");
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          setWishlistIds(parsed);
+        }
+      } catch (err) {
+        setWishlistIds([]);
+      }
+    }
   }, []);
 
   const colors = [
@@ -67,6 +84,16 @@ const Home = () => {
       return;
     }
     navigate("/customize", { state: { tshirt } });
+  };
+
+  const toggleWishlist = (id) => {
+    setWishlistIds((prev) => {
+      const next = prev.includes(id)
+        ? prev.filter((item) => item !== id)
+        : [...prev, id];
+      localStorage.setItem("dm_wishlist", JSON.stringify(next));
+      return next;
+    });
   };
 
   return (
@@ -220,9 +247,13 @@ const Home = () => {
                       <option value="price_high">Price: High to low</option>
                     </select>
                   </label>
-                  <div className="rounded-2xl border border-borderSoft bg-cream px-4 py-4 text-xs uppercase tracking-[0.28em] text-slate">
+                  <button
+                    type="button"
+                    className="rounded-2xl border border-borderSoft bg-cream px-4 py-4 text-left text-xs uppercase tracking-[0.28em] text-slate"
+                    onClick={() => setShowSizeGuide(true)}
+                  >
                     Size guide
-                  </div>
+                  </button>
                 </div>
               </div>
               <div className="rounded-2xl border border-borderSoft bg-brandOrangeSoft px-4 py-4 text-xs uppercase tracking-[0.28em] text-brandOrange">
@@ -261,8 +292,16 @@ const Home = () => {
                           </span>
                           <button
                             type="button"
-                            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-slate"
-                            onClick={(event) => event.stopPropagation()}
+                            className={`absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-lg ${
+                              wishlistIds.includes(tshirt._id)
+                                ? "text-brandOrange"
+                                : "text-slate"
+                            }`}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              toggleWishlist(tshirt._id);
+                            }}
+                            aria-label="Toggle wishlist"
                           >
                             ❤
                           </button>
@@ -369,6 +408,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <SizeGuideModal
+        open={showSizeGuide}
+        onClose={() => setShowSizeGuide(false)}
+      />
     </div>
   );
 };

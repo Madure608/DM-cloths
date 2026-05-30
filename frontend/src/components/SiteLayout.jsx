@@ -8,6 +8,66 @@ const SiteLayout = () => {
   const [userToken, setUserToken] = useState(() =>
     localStorage.getItem("dm_user_token")
   );
+  const [activeMenu, setActiveMenu] = useState("");
+
+  const megaMenus = {
+    Women: [
+      {
+        title: "Clothing",
+        items: ["Dresses", "Tops", "Sarees", "Skirts", "Denim"],
+      },
+      {
+        title: "Collections",
+        items: ["New arrivals", "Work edit", "Weekend", "Occasion"],
+      },
+      {
+        title: "Accessories",
+        items: ["Bags", "Jewelry", "Footwear", "Belts"],
+      },
+    ],
+    Men: [
+      {
+        title: "Clothing",
+        items: ["T-shirts", "Shirts", "Joggers", "Denim"],
+      },
+      {
+        title: "Collections",
+        items: ["New arrivals", "Essentials", "Streetwear"],
+      },
+      {
+        title: "Accessories",
+        items: ["Caps", "Bags", "Footwear"],
+      },
+    ],
+    "Kids & baby": [
+      {
+        title: "Kids",
+        items: ["Tops", "Bottoms", "Sets", "Sleepwear"],
+      },
+      {
+        title: "Baby",
+        items: ["Rompers", "Bodysuits", "Accessories"],
+      },
+      {
+        title: "Collections",
+        items: ["New arrivals", "Playtime", "Essentials"],
+      },
+    ],
+    "Home & lifestyle": [
+      {
+        title: "Home",
+        items: ["Bedding", "Cushions", "Candles"],
+      },
+      {
+        title: "Lifestyle",
+        items: ["Bottles", "Stationery", "Gifts"],
+      },
+      {
+        title: "Collections",
+        items: ["New arrivals", "Seasonal"],
+      },
+    ],
+  };
 
   useEffect(() => {
     setUserToken(localStorage.getItem("dm_user_token"));
@@ -96,7 +156,10 @@ const SiteLayout = () => {
           </div>
         </div>
 
-        <div className="bg-brandOrange text-white">
+        <div
+          className="relative bg-brandOrange text-white"
+          onMouseLeave={() => setActiveMenu("")}
+        >
           <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-6 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.28em]">
             {[
               "New arrivals",
@@ -108,12 +171,53 @@ const SiteLayout = () => {
               "Gift vouchers",
               "Buy 1 get 1",
               "Sale",
-            ].map((label) => (
-              <a key={label} href="/#collection" className="hover:text-white/80">
-                {label}
-              </a>
-            ))}
+            ].map((label) => {
+              const hasMenu = Boolean(megaMenus[label]);
+              if (hasMenu) {
+                return (
+                  <button
+                    key={label}
+                    type="button"
+                    className="hover:text-white/80"
+                    onMouseEnter={() => setActiveMenu(label)}
+                  >
+                    {label}
+                  </button>
+                );
+              }
+              return (
+                <a
+                  key={label}
+                  href="/#collection"
+                  className="hover:text-white/80"
+                  onMouseEnter={() => setActiveMenu("")}
+                >
+                  {label}
+                </a>
+              );
+            })}
           </div>
+
+          {activeMenu && megaMenus[activeMenu] && (
+            <div className="absolute left-0 right-0 top-full border-b border-borderSoft bg-white text-ink shadow-lg">
+              <div className="mx-auto grid w-full max-w-7xl gap-6 px-6 py-6 md:grid-cols-3">
+                {megaMenus[activeMenu].map((group) => (
+                  <div key={group.title} className="grid gap-3">
+                    <p className="text-xs uppercase tracking-[0.3em] text-brandOrange">
+                      {group.title}
+                    </p>
+                    <div className="grid gap-2 text-sm text-slate">
+                      {group.items.map((item) => (
+                        <a key={item} href="/#collection" className="hover:text-ink">
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </header>
 

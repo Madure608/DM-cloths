@@ -194,6 +194,12 @@ const Home = () => {
               </span>
             </div>
             <div className="flex flex-wrap items-center gap-3">
+              <Link
+                to="/customize"
+                className="h-10 rounded-full bg-brandOrange px-5 text-[11px] font-semibold uppercase tracking-[0.25em] text-white"
+              >
+                Start customizing
+              </Link>
               <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
                 Color
                 <select

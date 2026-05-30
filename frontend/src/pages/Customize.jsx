@@ -14,8 +14,6 @@ const Customize = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [stickerFile, setStickerFile] = useState(null);
-  const [preview, setPreview] = useState("");
   const [status, setStatus] = useState({ loading: false, error: "" });
   const [loadingStock, setLoadingStock] = useState(true);
 
@@ -31,18 +29,6 @@ const Customize = () => {
 
     load();
   }, []);
-
-  useEffect(() => {
-    if (!stickerFile) {
-      setPreview("");
-      return undefined;
-    }
-
-    const objectUrl = URL.createObjectURL(stickerFile);
-    setPreview(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [stickerFile]);
 
   const selectedTShirt = useMemo(
     () => tshirts.find((item) => item._id === selectedId) || preselected,
@@ -70,9 +56,6 @@ const Customize = () => {
       formData.append("selectedTShirtId", selectedTShirt._id);
       formData.append("selectedColor", selectedTShirt.color);
       formData.append("selectedSize", selectedSize);
-      if (stickerFile) {
-        formData.append("sticker", stickerFile);
-      }
 
       const response = await createOrderIntent(formData);
       const payload = {
@@ -103,7 +86,7 @@ const Customize = () => {
         <div className="flex flex-col gap-2">
           <h1 className="font-display text-4xl sm:text-5xl">Customize</h1>
           <p className="max-w-xl text-base text-slate">
-            Select a T-shirt color and size, then upload your sticker.
+            Select a T-shirt color and size, then confirm your details.
           </p>
         </div>
 
@@ -180,16 +163,6 @@ const Customize = () => {
                 />
               </label>
 
-              <label className="grid gap-2 text-sm">
-                <span className="text-slate">Upload sticker (optional)</span>
-                <input
-                  className="h-11 rounded-2xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 px-4 text-sm"
-                  type="file"
-                  accept="image/*"
-                  onChange={(event) => setStickerFile(event.target.files?.[0])}
-                />
-              </label>
-
               {status.error && (
                 <p className="rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
                   {status.error}
@@ -201,28 +174,15 @@ const Customize = () => {
                 className="h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.2em] text-white"
                 disabled={status.loading}
               >
-                {status.loading ? "Uploading..." : "Save & continue"}
+                {status.loading ? "Saving..." : "Save & continue"}
               </button>
             </div>
           </form>
 
           <div className="rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
             <p className="text-xs uppercase tracking-[0.3em] text-slate">
-              Preview
+              Summary
             </p>
-            <div className="mt-4 rounded-3xl border border-dashed border-borderSoft bg-brandOrangeSoft/40 p-6">
-              {preview ? (
-                <img
-                  src={preview}
-                  alt="Sticker preview"
-                  className="mx-auto max-h-60 rounded-2xl object-contain"
-                />
-              ) : (
-                <p className="text-sm text-slate">
-                  Upload a sticker to see it here.
-                </p>
-              )}
-            </div>
             {selectedTShirt && (
               <div className="mt-6 grid gap-2 text-sm text-slate">
                 <p className="text-ink">{selectedTShirt.color}</p>

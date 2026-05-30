@@ -207,15 +207,15 @@ const AdminDashboard = () => {
 
   if (!token) {
     return (
-      <main className="min-h-screen bg-sand px-6 py-12 text-ink">
-        <section className="mx-auto w-full max-w-xl rounded-3xl border border-stone/40 bg-white/80 p-8 shadow-sm">
+      <main className="min-h-screen bg-mist px-6 py-12 text-ink">
+        <section className="mx-auto w-full max-w-xl rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
           <h1 className="font-display text-3xl">Admin Dashboard</h1>
-          <p className="mt-2 text-sm text-clay">
+          <p className="mt-2 text-sm text-slate">
             Please sign in to access inventory controls.
           </p>
           <button
             type="button"
-            className="mt-6 h-11 rounded-full bg-ink px-6 text-sm font-semibold uppercase tracking-[0.2em] text-sand"
+            className="mt-6 h-11 rounded-full bg-brandOrange px-6 text-sm font-semibold uppercase tracking-[0.25em] text-white"
             onClick={() => navigate("/admin/login")}
           >
             Go to login
@@ -226,16 +226,18 @@ const AdminDashboard = () => {
   }
 
   return (
-    <main className="min-h-screen bg-sand px-6 py-12 text-ink">
+    <main className="min-h-screen bg-mist px-6 py-12 text-ink">
       <section className="mx-auto w-full max-w-6xl">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-col gap-2">
-            <p className="text-sm uppercase tracking-[0.3em] text-clay">Admin</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-brandOrange">
+              Admin
+            </p>
             <h1 className="font-display text-3xl sm:text-4xl">Dashboard</h1>
           </div>
           <button
             type="button"
-            className="h-10 rounded-full border border-clay px-5 text-xs font-semibold uppercase tracking-[0.2em]"
+            className="h-10 rounded-full border border-borderSoft px-5 text-xs font-semibold uppercase tracking-[0.25em]"
             onClick={handleLogout}
           >
             Log out
@@ -243,7 +245,7 @@ const AdminDashboard = () => {
         </div>
 
         {error && (
-          <p className="mt-6 rounded-2xl border border-ember/40 bg-ember/10 px-4 py-2 text-sm text-ember">
+          <p className="mt-6 rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
             {error}
           </p>
         )}
@@ -256,9 +258,9 @@ const AdminDashboard = () => {
           ].map((card) => (
             <div
               key={card.label}
-              className="rounded-3xl border border-stone/40 bg-white/80 p-4 shadow-sm"
+              className="rounded-3xl border border-borderSoft bg-white p-4 shadow-sm"
             >
-              <p className="text-xs uppercase tracking-[0.3em] text-clay">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate">
                 {card.label}
               </p>
               <p className="mt-3 text-2xl font-semibold text-ink">
@@ -269,18 +271,18 @@ const AdminDashboard = () => {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <div className="rounded-3xl border border-stone/40 bg-white/70 p-6 shadow-sm">
+          <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
             <h2 className="font-display text-2xl">Inventory</h2>
-            <p className="mt-2 text-sm text-clay">
+            <p className="mt-2 text-sm text-slate">
               Add or update T-shirt stock and sizes.
             </p>
 
             <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm">
-                  <span className="text-clay">Color</span>
+                  <span className="text-slate">Color</span>
                   <input
-                    className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+                    className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
                     value={form.color}
                     onChange={(event) =>
                       setForm({ ...form, color: event.target.value })
@@ -290,9 +292,9 @@ const AdminDashboard = () => {
                   />
                 </label>
                 <label className="grid gap-2 text-sm">
-                  <span className="text-clay">Price (Rs.)</span>
+                  <span className="text-slate">Price (Rs.)</span>
                   <input
-                    className="h-11 rounded-2xl border border-stone/40 bg-white px-4 text-sm"
+                    className="h-11 rounded-2xl border border-borderSoft bg-white px-4 text-sm"
                     value={form.price}
                     onChange={(event) =>
                       setForm({ ...form, price: event.target.value })
@@ -306,12 +308,12 @@ const AdminDashboard = () => {
                 </label>
               </div>
               <div className="grid gap-3">
-                <p className="text-sm text-clay">Sizes & stock</p>
+                <p className="text-sm text-slate">Sizes & stock</p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {form.sizes.map((entry, index) => (
                     <label
                       key={entry.size}
-                      className="flex items-center justify-between rounded-2xl border border-stone/40 bg-white px-4 py-3 text-sm"
+                      className="flex items-center justify-between rounded-2xl border border-borderSoft bg-white px-4 py-3 text-sm"
                     >
                       <span className="flex items-center gap-3">
                         <input
@@ -329,7 +331,7 @@ const AdminDashboard = () => {
                         {entry.size}
                       </span>
                       <input
-                        className="h-9 w-24 rounded-xl border border-stone/40 bg-white px-3 text-xs"
+                        className="h-9 w-24 rounded-xl border border-borderSoft bg-white px-3 text-xs"
                         value={entry.stock}
                         onChange={(event) => {
                           const updated = [...form.sizes];
@@ -350,9 +352,9 @@ const AdminDashboard = () => {
               </div>
               <div className="grid gap-3">
                 <label className="grid gap-2 text-sm">
-                  <span className="text-clay">Image upload</span>
+                  <span className="text-slate">Image upload</span>
                   <input
-                    className="h-11 rounded-2xl border border-dashed border-stone/50 bg-sand/70 px-4 text-sm"
+                    className="h-11 rounded-2xl border border-dashed border-borderSoft bg-cream px-4 text-sm"
                     type="file"
                     accept="image/*"
                     onChange={(event) => {
@@ -368,13 +370,13 @@ const AdminDashboard = () => {
                   <img
                     src={form.imagePreview}
                     alt="T-shirt preview"
-                    className="h-32 w-full rounded-2xl border border-stone/30 object-cover"
+                    className="h-32 w-full rounded-2xl border border-borderSoft object-cover"
                   />
                 )}
               </div>
 
               {message && (
-                <p className="rounded-2xl border border-stone/40 bg-sand px-4 py-2 text-sm text-clay">
+                <p className="rounded-2xl border border-borderSoft bg-cream px-4 py-2 text-sm text-slate">
                   {message}
                 </p>
               )}
@@ -382,7 +384,7 @@ const AdminDashboard = () => {
               <div className="flex flex-wrap gap-3">
                 <button
                   type="submit"
-                  className="h-11 rounded-full bg-ink px-6 text-xs font-semibold uppercase tracking-[0.2em] text-sand"
+                  className="h-11 rounded-full bg-brandOrange px-6 text-xs font-semibold uppercase tracking-[0.25em] text-white"
                   disabled={saving}
                 >
                   {saving
@@ -394,7 +396,7 @@ const AdminDashboard = () => {
                 {editingId && (
                   <button
                     type="button"
-                    className="h-11 rounded-full border border-clay px-6 text-xs font-semibold uppercase tracking-[0.2em]"
+                    className="h-11 rounded-full border border-borderSoft px-6 text-xs font-semibold uppercase tracking-[0.25em]"
                     onClick={() => {
                       setEditingId(null);
                       setForm(emptyForm);
@@ -408,14 +410,14 @@ const AdminDashboard = () => {
 
             <div className="mt-8 grid gap-4">
               {loading ? (
-                <p className="text-sm text-clay">Loading inventory...</p>
+                <p className="text-sm text-slate">Loading inventory...</p>
               ) : tshirts.length === 0 ? (
-                <p className="text-sm text-clay">No T-shirts yet.</p>
+                <p className="text-sm text-slate">No T-shirts yet.</p>
               ) : (
                 tshirts.map((tshirt) => (
                   <div
                     key={tshirt._id}
-                      className="rounded-2xl border border-stone/30 bg-white px-4 py-3"
+                    className="rounded-2xl border border-borderSoft bg-white px-4 py-3"
                   >
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
@@ -423,16 +425,16 @@ const AdminDashboard = () => {
                             <img
                               src={tshirt.imageUrl}
                               alt={tshirt.color}
-                              className="h-16 w-16 rounded-2xl border border-stone/30 object-cover"
+                              className="h-16 w-16 rounded-2xl border border-borderSoft object-cover"
                             />
                           ) : (
-                            <div className="h-16 w-16 rounded-2xl border border-stone/30 bg-sand" />
+                            <div className="h-16 w-16 rounded-2xl border border-borderSoft bg-cream" />
                           )}
                           <div>
                             <p className="text-sm font-semibold text-ink">
                               {tshirt.color}
                             </p>
-                            <p className="text-xs text-clay">
+                            <p className="text-xs text-slate">
                               Rs. {tshirt.price} |{" "}
                               {tshirt.sizesAvailable
                                 .map((entry) => `${entry.size}:${entry.stock}`)
@@ -443,14 +445,14 @@ const AdminDashboard = () => {
                       <div className="flex gap-2">
                         <button
                           type="button"
-                          className="rounded-full border border-clay px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]"
+                          className="rounded-full border border-borderSoft px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.25em]"
                           onClick={() => handleEdit(tshirt)}
                         >
                           Edit
                         </button>
                         <button
                           type="button"
-                          className="rounded-full border border-ember/40 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-ember"
+                          className="rounded-full border border-brandOrange/40 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-brandOrange"
                           onClick={() => handleDelete(tshirt)}
                         >
                           Delete
@@ -463,16 +465,16 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-stone/40 bg-white/70 p-6 shadow-sm">
+          <div className="rounded-3xl border border-borderSoft bg-white p-6 shadow-sm">
             <h2 className="font-display text-2xl">Order Intents</h2>
-            <p className="mt-2 text-sm text-clay">
+            <p className="mt-2 text-sm text-slate">
               Customers who clicked checkout.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              <label className="text-xs uppercase tracking-[0.2em] text-clay">
+              <label className="text-xs uppercase tracking-[0.2em] text-slate">
                 Status
                 <select
-                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
                   value={intentFilter}
                   onChange={(event) => setIntentFilter(event.target.value)}
                 >
@@ -482,10 +484,10 @@ const AdminDashboard = () => {
                   <option value="closed">Closed</option>
                 </select>
               </label>
-              <label className="text-xs uppercase tracking-[0.2em] text-clay">
+              <label className="text-xs uppercase tracking-[0.2em] text-slate">
                 Search
                 <input
-                  className="mt-2 h-10 rounded-2xl border border-stone/40 bg-white px-3 text-xs"
+                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Name, phone, color"
@@ -494,16 +496,16 @@ const AdminDashboard = () => {
             </div>
             <div className="mt-6 grid gap-4">
               {loading ? (
-                <p className="text-sm text-clay">Loading intents...</p>
+                <p className="text-sm text-slate">Loading intents...</p>
               ) : filteredIntents.length === 0 ? (
-                <p className="text-sm text-clay">No intents yet.</p>
+                <p className="text-sm text-slate">No intents yet.</p>
               ) : (
                 filteredIntents.map((intent) => (
                   <div
                     key={intent._id}
-                    className="rounded-2xl border border-stone/30 bg-white px-4 py-3"
+                    className="rounded-2xl border border-borderSoft bg-white px-4 py-3"
                   >
-                    <div className="flex flex-col gap-2 text-xs text-clay">
+                    <div className="flex flex-col gap-2 text-xs text-slate">
                       <p className="text-sm font-semibold text-ink">
                         {intent.customerName || "Customer"}
                       </p>
@@ -516,7 +518,7 @@ const AdminDashboard = () => {
                         href={intent.uploadedStickerUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-ember"
+                        className="text-brandOrange"
                       >
                         View sticker
                       </a>

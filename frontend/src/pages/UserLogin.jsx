@@ -31,9 +31,12 @@ const UserLogin = () => {
   return (
     <main className="min-h-screen bg-mist px-6 py-12 text-ink">
       <section className="mx-auto w-full max-w-md rounded-3xl border border-borderSoft bg-white p-8 shadow-sm">
-        <h1 className="font-display text-4xl">Sign in</h1>
+        <p className="text-xs uppercase tracking-[0.3em] text-brandOrange">
+          Customer login
+        </p>
+        <h1 className="mt-3 font-display text-4xl">Sign in</h1>
         <p className="mt-2 text-sm text-slate">
-          Access your saved orders and preferences.
+          Access your saved orders, wish list, and checkout history.
         </p>
         <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
           <label className="grid gap-2 text-sm">
@@ -67,7 +70,7 @@ const UserLogin = () => {
           )}
           <button
             type="submit"
-            className="h-11 rounded-full bg-brandOrange text-sm font-semibold uppercase tracking-[0.2em] text-white"
+            className="h-11 rounded-full bg-brandOrange text-sm font-semibold uppercase tracking-[0.25em] text-white"
             disabled={status.loading}
           >
             {status.loading ? "Signing in..." : "Sign in"}

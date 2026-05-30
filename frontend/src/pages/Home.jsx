@@ -70,218 +70,238 @@ const Home = () => {
   };
 
   return (
-    <div className="px-6 py-10 text-ink">
-      <section className="mx-auto flex w-full max-w-6xl flex-col gap-12">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="flex flex-col gap-6">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-brandOrangeSoft px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.35em] text-brandOrange">
-              Marketplace drops
-            </div>
-            <h1 className="font-display text-5xl leading-none sm:text-6xl">
-              Build your next tee. Shop it like a marketplace.
-            </h1>
-            <p className="max-w-2xl text-base text-slate">
-              New colors every week, instant WhatsApp checkout, and fast island
-              delivery. Pick a fit, add your sticker, and launch a drop in
-              minutes.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to="/customize"
-                className="rounded-full bg-brandBlue px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white"
-              >
-                Start customizing
-              </Link>
-              <Link
-                to="/signup"
-                className="rounded-full border border-borderSoft bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-ink"
-              >
-                Create account
-              </Link>
-            </div>
-            <div className="grid grid-cols-3 gap-3 text-[11px] uppercase tracking-[0.3em] text-slate">
-              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
-                48-hour prep
-              </div>
-              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
-                Live inventory
-              </div>
-              <div className="rounded-2xl border border-borderSoft bg-white px-4 py-3 text-center">
-                Island delivery
-              </div>
-            </div>
-          </div>
-
-          <div className="grid gap-4">
-            <div className="overflow-hidden rounded-3xl border border-borderSoft bg-white shadow-sm">
+    <div className="text-ink">
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-10">
+        <div className="rounded-3xl border border-borderSoft bg-white">
+          <div className="grid gap-6 overflow-hidden rounded-3xl lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="relative min-h-[360px]">
               <img
                 src={homePostImage}
-                alt="DM CLOTHS featured post"
-                className="h-64 w-full object-cover sm:h-80"
+                alt="DM CLOTHS campaign"
+                className="h-full w-full object-cover"
                 loading="lazy"
               />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {["Best sellers", "New prints"].map((label) => (
-                <div
-                  key={label}
-                  className="rounded-3xl border border-borderSoft bg-white px-4 py-5 text-sm text-slate"
-                >
-                  <p className="text-xs uppercase tracking-[0.3em] text-brandOrange">
-                    {label}
-                  </p>
-                  <p className="mt-2 text-sm">
-                    Curated weekly and ready for fast checkout.
-                  </p>
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
+                <p className="text-xs uppercase tracking-[0.45em]">Site wide</p>
+                <h1 className="mt-3 font-display text-5xl sm:text-6xl">Offer</h1>
+                <p className="mt-4 text-4xl font-semibold">Flat 20% off</p>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <Link
+                    to="/customize"
+                    className="rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-brandOrange"
+                  >
+                    Start customizing
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="rounded-full border border-white/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.25em]"
+                  >
+                    Create account
+                  </Link>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              className="rounded-full border border-borderSoft bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate"
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div id="flash" className="grid gap-4 rounded-3xl bg-ink px-6 py-8 text-white">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-white/70">
-                Flash sale
-              </p>
-              <h2 className="font-display text-3xl">Limited-time drops</h2>
-            </div>
-            <div className="rounded-full bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em]">
-              Ends in 04:21:09
-            </div>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              "Bold orange",
-              "Soft ash",
-              "Jet black",
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-3xl border border-white/10 bg-white/5 p-4"
-              >
-                <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                  Flash pick
+            <div className="flex flex-col justify-between gap-6 p-8">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-brandOrange">
+                  Trending now
                 </p>
-                <p className="mt-2 text-sm font-semibold">{item}</p>
-                <p className="mt-3 text-xs text-white/70">
-                  Save up to 20% on limited stock.
+                <h2 className="mt-3 font-display text-4xl">
+                  New arrivals for every drop.
+                </h2>
+                <p className="mt-4 text-sm text-slate">
+                  Shop fresh prints, seasonal palettes, and limited editions.
                 </p>
               </div>
-            ))}
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  "Buy 1 get 1 tees",
+                  "Members-only vouchers",
+                  "Weekend sale",
+                  "Express delivery",
+                ].map((label) => (
+                  <div
+                    key={label}
+                    className="rounded-2xl border border-borderSoft bg-cream px-4 py-4 text-xs uppercase tracking-[0.28em] text-slate"
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        <div id="collection" className="grid gap-4">
+        <div className="grid gap-4 rounded-3xl border border-borderSoft bg-white px-6 py-5 sm:flex sm:items-center sm:justify-between">
+          <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.25em] text-slate">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className="rounded-full border border-borderSoft px-4 py-2 hover:border-brandOrange"
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-slate">
+            <span className="rounded-full bg-brandOrangeSoft px-4 py-2 text-brandOrange">
+              Site wide
+            </span>
+            <span>Use code: BUG20</span>
+          </div>
+        </div>
+
+        <div id="collection" className="grid gap-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <h2 className="font-display text-3xl">New arrivals</h2>
-              <span className="text-xs uppercase tracking-[0.3em] text-slate">
-                Updated weekly
-              </span>
+            <div className="flex items-center gap-6">
+              <div className="h-px w-16 bg-borderSoft" />
+              <div>
+                <h2 className="font-display text-3xl">New arrivals</h2>
+                <span className="text-xs uppercase tracking-[0.3em] text-slate">
+                  Updated weekly
+                </span>
+              </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 to="/customize"
-                className="h-10 rounded-full bg-brandOrange px-5 text-[11px] font-semibold uppercase tracking-[0.25em] text-white"
+                className="rounded-full bg-brandOrange px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-white"
               >
                 Start customizing
               </Link>
-              <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
-                Color
-                <select
-                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
-                  value={colorFilter}
-                  onChange={(event) => setColorFilter(event.target.value)}
-                >
-                  {colors.map((color) => (
-                    <option key={color} value={color}>
-                      {color === "all" ? "All" : color}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
-                Sort
-                <select
-                  className="mt-2 h-10 rounded-2xl border border-borderSoft bg-white px-3 text-xs"
-                  value={sortBy}
-                  onChange={(event) => setSortBy(event.target.value)}
-                >
-                  <option value="latest">Latest</option>
-                  <option value="price_low">Price: Low to high</option>
-                  <option value="price_high">Price: High to low</option>
-                </select>
-              </label>
+              <span className="text-[11px] uppercase tracking-[0.3em] text-slate">
+                View all
+              </span>
             </div>
           </div>
 
-          {error && (
-            <p className="rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
-              {error}
-            </p>
-          )}
+          <div className="grid gap-4 rounded-3xl border border-borderSoft bg-white p-6 lg:grid-cols-[1fr_3fr]">
+            <div className="grid gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate">
+                  Filters
+                </p>
+                <div className="mt-4 grid gap-3">
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
+                    Color
+                    <select
+                      className="mt-2 h-10 w-full rounded-xl border border-borderSoft bg-white px-3 text-xs"
+                      value={colorFilter}
+                      onChange={(event) => setColorFilter(event.target.value)}
+                    >
+                      {colors.map((color) => (
+                        <option key={color} value={color}>
+                          {color === "all" ? "All" : color}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
+                    Size
+                    <select className="mt-2 h-10 w-full rounded-xl border border-borderSoft bg-white px-3 text-xs">
+                      <option>All</option>
+                      <option>S</option>
+                      <option>M</option>
+                      <option>L</option>
+                      <option>XL</option>
+                    </select>
+                  </label>
+                  <label className="text-[11px] uppercase tracking-[0.3em] text-slate">
+                    Sort
+                    <select
+                      className="mt-2 h-10 w-full rounded-xl border border-borderSoft bg-white px-3 text-xs"
+                      value={sortBy}
+                      onChange={(event) => setSortBy(event.target.value)}
+                    >
+                      <option value="latest">Latest</option>
+                      <option value="price_low">Price: Low to high</option>
+                      <option value="price_high">Price: High to low</option>
+                    </select>
+                  </label>
+                  <div className="rounded-2xl border border-borderSoft bg-cream px-4 py-4 text-xs uppercase tracking-[0.28em] text-slate">
+                    Size guide
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-borderSoft bg-brandOrangeSoft px-4 py-4 text-xs uppercase tracking-[0.28em] text-brandOrange">
+                Buy 1 get 1
+              </div>
+            </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {loading
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <div
-                    key={`skeleton-${index}`}
-                    className="h-44 animate-fadeUp rounded-3xl border border-borderSoft bg-white"
-                  />
-                ))
-              : sorted.map((tshirt, index) => (
-                  <motion.button
-                    key={tshirt._id}
-                    type="button"
-                    className="group flex h-full flex-col justify-between rounded-3xl border border-borderSoft bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-brandOrange/40"
-                    custom={index}
-                    initial="hidden"
-                    animate="visible"
-                    variants={cardVariants}
-                    onClick={() => handleSelect(tshirt)}
-                  >
-                    {tshirt.imageUrl ? (
-                      <img
-                        src={tshirt.imageUrl}
-                        alt={tshirt.color}
-                        className="h-40 w-full rounded-2xl border border-borderSoft object-cover"
+            <div>
+              {error && (
+                <p className="mb-4 rounded-2xl border border-brandOrange/30 bg-brandOrangeSoft px-4 py-2 text-sm text-brandOrange">
+                  {error}
+                </p>
+              )}
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {loading
+                  ? Array.from({ length: 6 }).map((_, index) => (
+                      <div
+                        key={`skeleton-${index}`}
+                        className="h-64 animate-fadeUp rounded-3xl border border-borderSoft bg-white"
                       />
-                    ) : (
-                      <div className="h-40 w-full rounded-2xl border border-borderSoft bg-brandOrangeSoft" />
-                    )}
-                    <div className="mt-4 flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate">
-                        {tshirt.color}
-                      </p>
-                      <span className="text-sm font-semibold text-ink">
-                        Rs. {tshirt.price}
-                      </span>
-                    </div>
-                    <div className="mt-2 text-sm text-slate">
-                      Sizes: {tshirt.sizesAvailable.map((s) => s.size).join(", ")}
-                    </div>
-                    <div className="mt-6 flex items-center justify-between">
-                      <span className="text-xs uppercase tracking-[0.2em] text-ink">
-                        Customize
-                      </span>
-                      <span className="h-8 w-8 rounded-full border border-borderSoft bg-brandOrangeSoft" />
-                    </div>
-                  </motion.button>
-                ))}
+                    ))
+                  : sorted.map((tshirt, index) => (
+                      <motion.button
+                        key={tshirt._id}
+                        type="button"
+                        className="group flex h-full flex-col rounded-3xl border border-borderSoft bg-white p-4 text-left shadow-sm transition hover:-translate-y-1 hover:border-brandOrange/40"
+                        custom={index}
+                        initial="hidden"
+                        animate="visible"
+                        variants={cardVariants}
+                        onClick={() => handleSelect(tshirt)}
+                      >
+                        <div className="relative">
+                          <span className="absolute left-3 top-3 rounded bg-white px-2 py-1 text-[10px] uppercase tracking-[0.25em] text-slate">
+                            New
+                          </span>
+                          <button
+                            type="button"
+                            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-slate"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            ❤
+                          </button>
+                          {tshirt.imageUrl ? (
+                            <img
+                              src={tshirt.imageUrl}
+                              alt={tshirt.color}
+                              className="h-56 w-full rounded-2xl object-cover"
+                            />
+                          ) : (
+                            <div className="h-56 w-full rounded-2xl bg-brandOrangeSoft" />
+                          )}
+                        </div>
+                        <div className="mt-4">
+                          <p className="text-xs uppercase tracking-[0.3em] text-slate">
+                            {tshirt.color}
+                          </p>
+                          <p className="mt-2 text-sm text-slate">
+                            Sizes: {tshirt.sizesAvailable.map((s) => s.size).join(", ")}
+                          </p>
+                          <p className="mt-3 text-base font-semibold text-ink">
+                            Rs. {tshirt.price}
+                          </p>
+                          <Link
+                            to={`/product/${tshirt._id}`}
+                            state={{ tshirt }}
+                            className="mt-3 inline-flex text-[11px] uppercase tracking-[0.3em] text-brandOrange"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            View details
+                          </Link>
+                          <p className="mt-2 text-xs uppercase tracking-[0.3em] text-slate">
+                            or 3 x Rs. {Math.round(tshirt.price / 3)}
+                          </p>
+                        </div>
+                      </motion.button>
+                    ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -289,15 +309,15 @@ const Home = () => {
           {[
             {
               title: "Premium fabric",
-              body: "180 GSM cotton blends that hold color and shape after every wash.",
+              body: "Soft cotton blends that hold shape after every wash.",
             },
             {
-              title: "Smart sizing",
-              body: "Balanced cuts that work for streetwear or clean minimal fits.",
+              title: "Easy returns",
+              body: "Shop with confidence and exchange within 7 days.",
             },
             {
-              title: "Fast confirmation",
-              body: "Quick WhatsApp confirmations and tracked updates.",
+              title: "Pay later",
+              body: "Split your payment in 3 easy installments.",
             },
           ].map((item) => (
             <div key={item.title} className="grid gap-2">
@@ -311,7 +331,7 @@ const Home = () => {
 
         <div id="faq" className="grid gap-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-3xl">FAQ</h2>
+            <h2 className="font-display text-3xl">Size guide</h2>
             <Link
               to="/customize"
               className="text-xs uppercase tracking-[0.3em] text-slate"
@@ -322,20 +342,20 @@ const Home = () => {
           <div className="grid gap-4 lg:grid-cols-2">
             {[
               {
-                q: "How long does it take?",
-                a: "Most orders are ready within 48 hours. Delivery takes 1-3 days island-wide.",
+                q: "How do I pick the right size?",
+                a: "Use the size chart in Customize to compare chest and length.",
               },
               {
-                q: "Can I use my own artwork?",
-                a: "Yes. Upload any PNG/JPG. We will confirm placement via WhatsApp.",
+                q: "What sizes are in stock?",
+                a: "Sizes are updated in real time for each color.",
               },
               {
-                q: "Do you store my file?",
-                a: "We keep files only until the order is complete, then remove them.",
+                q: "Do you offer exchanges?",
+                a: "Yes, exchanges are accepted within 7 days.",
               },
               {
-                q: "What sizes are available?",
-                a: "Sizes depend on live stock. The customize screen shows current availability.",
+                q: "Need help?",
+                a: "Chat with us on WhatsApp and we will guide your fit.",
               },
             ].map((item) => (
               <div
@@ -346,37 +366,6 @@ const Home = () => {
                 <p className="mt-2 text-sm text-slate">{item.a}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        <div className="rounded-3xl bg-brandBlue px-8 py-10 text-white">
-          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="grid gap-3">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/70">
-                Ready when you are
-              </p>
-              <h2 className="font-display text-4xl">
-                Launch your next drop today.
-              </h2>
-              <p className="text-sm text-white/80">
-                Create a design, share it with your audience, and let us handle
-                production and delivery.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                to="/customize"
-                className="rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink"
-              >
-                Start customizing
-              </Link>
-              <Link
-                to="/signup"
-                className="rounded-full border border-white/60 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em]"
-              >
-                Create account
-              </Link>
-            </div>
           </div>
         </div>
       </section>

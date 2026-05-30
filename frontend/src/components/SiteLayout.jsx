@@ -21,40 +21,35 @@ const SiteLayout = () => {
 
   return (
     <div className="min-h-screen bg-mist text-ink">
-      <header className="sticky top-0 z-30 bg-ink/95 text-white shadow-sm backdrop-blur">
-        <div className="border-b border-white/10">
-          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-2 text-[11px] uppercase tracking-[0.28em] text-white/70">
-            <span className="inline-flex items-center gap-3">
-              <span className="h-2 w-2 rounded-full bg-brandBlue shadow-[0_0_8px_rgba(31,75,153,0.8)]" />
-              Delivering across Sri Lanka
-            </span>
-            <div className="flex flex-wrap items-center gap-5" />
+      <header className="sticky top-0 z-30 bg-white shadow-sm">
+        <div className="bg-brandOrange text-white">
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-2 text-[11px] uppercase tracking-[0.3em]">
+            <span>Site wide offer: flat 20% off</span>
+            <span>Free delivery over Rs. 7,500</span>
           </div>
         </div>
 
-        <div>
-          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-4 md:py-5">
-            <Link to="/" className="group flex items-center gap-3">
-              <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15">
-                <img
-                  src={logo}
-                  alt="DM Cloths"
-                  className="h-10 w-10 rounded-xl object-cover"
-                />
-              </span>
-              <span className="font-display text-3xl tracking-[0.2em] group-hover:text-white">
+        <div className="border-b border-borderSoft">
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="DM Cloths"
+                className="h-10 w-10 rounded-xl object-cover"
+              />
+              <span className="font-display text-2xl uppercase tracking-[0.35em] text-brandOrange">
                 DM CLOTHS
               </span>
             </Link>
 
-            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 shadow-sm backdrop-blur focus-within:border-brandBlue/70 focus-within:shadow">
+            <div className="flex min-w-[220px] flex-1 items-center gap-3 rounded-full border border-borderSoft bg-white px-4 py-2 shadow-sm focus-within:border-brandOrange">
               <input
-                className="w-full border-none bg-transparent text-sm text-white placeholder:text-white/60 outline-none"
-                placeholder="Search tees, colors, collections"
+                className="w-full border-none bg-transparent text-sm text-ink placeholder:text-slate/70 outline-none"
+                placeholder="Search dresses, tees, sarees"
               />
               <button
                 type="button"
-                className="inline-flex items-center gap-2 rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
+                className="inline-flex items-center gap-2 rounded-full bg-brandOrange px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-white"
               >
                 <svg
                   aria-hidden="true"
@@ -68,186 +63,115 @@ const SiteLayout = () => {
               </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                to="/cart"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="currentColor"
-                >
+            <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.25em] text-slate">
+              <Link to="/cart" className="inline-flex items-center gap-2">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
                   <path d="M7 18a2 2 0 1 0 2 2 2 2 0 0 0-2-2Zm10 0a2 2 0 1 0 2 2 2 2 0 0 0-2-2ZM6.2 6l.5 2H20a1 1 0 0 1 1 .76l-1.4 6a2 2 0 0 1-2 1.56H9.1a2 2 0 0 1-2-1.6L5.4 6.6 5 4H3V2h3a1 1 0 0 1 1 .8Z" />
                 </svg>
-                Cart
+                Shopping cart
+              </Link>
+              <Link to="/account" className="inline-flex items-center gap-2">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+                  <path d="M12 21.2c-1.8-1.4-3.2-2.6-4.3-3.7-2.6-2.5-3.8-4.7-3.8-6.9A4.6 4.6 0 0 1 8.4 6c1.4 0 2.7.6 3.6 1.6A5 5 0 0 1 19.7 9c0 2.2-1.2 4.4-3.8 6.9-1.1 1.1-2.5 2.3-3.9 3.7l-.6.5-.6-.5Z" />
+                </svg>
+                My wish list
               </Link>
               {userToken ? (
-                <>
-                  <Link
-                    to="/account"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="currentColor"
-                    >
-                      <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0 12c-4.42 0-8 2.24-8 5v3h16v-3c0-2.76-3.58-5-8-5Z" />
-                    </svg>
-                    My Account
-                  </Link>
-                  <button
-                    type="button"
-                    className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-white/15"
-                    onClick={handleLogout}
-                  >
-                    Sign out
-                  </button>
-                </>
+                <button
+                  type="button"
+                  className="rounded-full border border-borderSoft px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-ink"
+                  onClick={handleLogout}
+                >
+                  Sign out
+                </button>
               ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 hover:text-white"
-                  >
-                    Sign in
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="rounded-full bg-brandBlue px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow"
-                  >
-                    Sign up
-                  </Link>
-                </>
+                <Link
+                  to="/login"
+                  className="rounded-full border border-borderSoft px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-ink"
+                >
+                  Sign in
+                </Link>
               )}
             </div>
           </div>
+        </div>
 
-          <div className="border-t border-white/10">
-            <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-3 text-xs uppercase tracking-[0.25em] text-white/70">
-              <Link
-                to="/"
-                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
-              >
-                Home
-              </Link>
-              <Link
-                to="/customize"
-                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
-              >
-                Customize
-              </Link>
-              <a
-                href="/#collection"
-                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
-              >
-                New arrivals
+        <div className="bg-brandOrange text-white">
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-6 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.28em]">
+            {[
+              "New arrivals",
+              "Women",
+              "Men",
+              "Kids & baby",
+              "Health & beauty",
+              "Home & lifestyle",
+              "Gift vouchers",
+              "Buy 1 get 1",
+              "Sale",
+            ].map((label) => (
+              <a key={label} href="/#collection" className="hover:text-white/80">
+                {label}
               </a>
-              <a
-                href="/#flash"
-                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
-              >
-                Flash sale
-              </a>
-              <a
-                href="/#faq"
-                className="relative hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:bg-brandBlue after:transition-all hover:after:w-full"
-              >
-                Support
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </header>
 
       <main className="relative">
-        <div className="pointer-events-none absolute left-0 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/3 rounded-full bg-brandOrangeSoft blur-3xl" />
-        <div className="pointer-events-none absolute right-0 top-24 h-80 w-80 translate-x-1/3 rounded-full bg-brandYellow/40 blur-3xl" />
+        <div className="pointer-events-none absolute left-0 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/3 rounded-full bg-brandOrangeSoft/60 blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-24 h-80 w-80 translate-x-1/3 rounded-full bg-rose/50 blur-3xl" />
         <Outlet />
       </main>
 
-      <footer className="border-t border-white/10 bg-ink text-white">
+      <footer className="border-t border-borderSoft bg-white">
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div className="grid gap-3">
-            <p className="font-display text-2xl tracking-[0.3em]">DM CLOTHS</p>
-            <p className="text-sm text-white/70">
-              Custom tees with a marketplace feel: fresh drops, fast checkout,
-              and island-wide delivery.
+            <p className="font-display text-2xl uppercase tracking-[0.35em] text-brandOrange">
+              DM CLOTHS
             </p>
-            <div className="mt-4 h-px w-16 bg-white/20" />
+            <p className="text-sm text-slate">
+              Fashion-forward drops, weekly arrivals, and island-wide delivery.
+            </p>
+            <div className="mt-4 h-px w-16 bg-brandOrange/30" />
           </div>
-          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-white/70">
-            <span className="text-[10px] text-white/50">Quick links</span>
-            <Link to="/customize" className="hover:text-white">
+          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-slate">
+            <span className="text-[10px] text-slate/60">Shop</span>
+            <Link to="/customize" className="hover:text-ink">
               Start customizing
             </Link>
-            <Link to="/login" className="hover:text-white">
-              My account
-            </Link>
-            <Link to="/signup" className="hover:text-white">
-              Create account
-            </Link>
-          </div>
-          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-white/70">
-            <span className="text-[10px] text-white/50">Support</span>
-            <a href="/#faq" className="hover:text-white">
-              Help center
+            <a href="/#collection" className="hover:text-ink">
+              New arrivals
             </a>
-            <div className="mt-1 grid gap-2 text-[11px] text-white/70">
-              <span className="inline-flex items-center gap-2">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  className="h-3.5 w-3.5"
-                  fill="currentColor"
-                >
-                  <path d="M6.6 3.5 9 2.7a1.2 1.2 0 0 1 1.4.5l2.1 3.2a1.2 1.2 0 0 1-.2 1.6l-1.7 1.5a12 12 0 0 0 5 5l1.5-1.7a1.2 1.2 0 0 1 1.6-.2l3.2 2.1a1.2 1.2 0 0 1 .5 1.4l-.8 2.4a1.2 1.2 0 0 1-1.2.8C11 20.3 3.7 13 3.7 4.7a1.2 1.2 0 0 1 .9-1.2Z" />
-                </svg>
-                Hotline: 076-364-9510
-              </span>
-              <span>hello@dmcloths.lk</span>
-            </div>
-            <div className="mt-2 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-white/70">
+            <a href="/#faq" className="hover:text-ink">
+              Size guide
+            </a>
+          </div>
+          <div className="grid gap-3 text-xs uppercase tracking-[0.28em] text-slate">
+            <span className="text-[10px] text-slate/60">Customer care</span>
+            <span>Hotline: 076-364-9510</span>
+            <span>hello@dmcloths.lk</span>
+            <div className="mt-2 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-slate">
               <a
                 href="https://www.facebook.com/profile.php?id=61587798652228"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-ink"
               >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="currentColor"
-                >
-                  <path d="M13 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1Z" />
-                </svg>
                 Facebook
               </a>
-              <span className="h-3 w-px bg-white/20" />
+              <span className="h-3 w-px bg-borderSoft" />
               <a
                 href="https://tiktok.com/@glowy.clothes7"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 hover:text-white"
+                className="inline-flex items-center gap-2 hover:text-ink"
               >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="currentColor"
-                >
-                  <path d="M16.5 3c.4 2.1 1.9 3.6 4 4v3.1c-1.5 0-3-.5-4-1.4V15a6 6 0 1 1-6-6c.4 0 .7 0 1 .1V12a3 3 0 1 0 2.5 2.9V3h2.5Z" />
-                </svg>
                 TikTok
               </a>
             </div>
             <Link
               to="/admin/login"
-              className="mt-2 w-fit rounded-full border border-white/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/80 hover:text-white"
+              className="mt-2 w-fit rounded-full border border-borderSoft px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink"
             >
               Admin
             </Link>
